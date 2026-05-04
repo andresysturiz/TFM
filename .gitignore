@@ -1,6 +1,34 @@
+# --- PYTHON ---
 venv/
 __pycache__/
-.ipynb_checkpoints/
 *.pyc
+*.pyo
+*.pyd
+
+# --- JUPYTER ---
+.ipynb_checkpoints/
+
+# --- R ---
+.Rhistory
+.RData
+.Rproj.user/
+.Ruserdata
+
+# --- MACOS ---
 .DS_Store
-data/*.csv
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+
+# --- VS CODE ---
+.vscode/
+
+# --- PROJECT STRUCTURE ---
+logs/
+figures/
+results/
+
+# --- DATA ---
+# Ignorar procesados, NO ignorar raw
+data/processed/
