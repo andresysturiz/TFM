@@ -1,5 +1,3 @@
-# scripts/models/lasso_model.py
-
 from sklearn.linear_model import Lasso
 from scripts.core.logger import get_logger
 
@@ -7,6 +5,8 @@ logger = get_logger("LassoModel")
 
 class LassoModel:
     def __init__(self, alpha=0.01):
+        self.name = "Lasso"
+        self.alpha = alpha
         self.model = Lasso(alpha=alpha, max_iter=5000)
         logger.info(f"Inicializando Lasso con alpha={alpha}")
 
@@ -20,7 +20,7 @@ class LassoModel:
 
     def predict(self, X):
         try:
-            return self.model.predict(X)
+            return self.model.predict(X).ravel()
         except Exception as e:
             logger.error(f"Error prediciendo con Lasso: {str(e)}")
             raise

@@ -1,5 +1,3 @@
-# scripts/models/rf_model.py
-
 from sklearn.ensemble import RandomForestRegressor
 from scripts.core.logger import get_logger
 
@@ -7,6 +5,7 @@ logger = get_logger("RFModel")
 
 class RFModel:
     def __init__(self, n_estimators=300, random_state=42):
+        self.name = "RandomForest"
         self.model = RandomForestRegressor(
             n_estimators=n_estimators,
             random_state=random_state
@@ -23,7 +22,7 @@ class RFModel:
 
     def predict(self, X):
         try:
-            return self.model.predict(X)
+            return self.model.predict(X).ravel()
         except Exception as e:
             logger.error(f"Error prediciendo con RandomForest: {str(e)}")
             raise

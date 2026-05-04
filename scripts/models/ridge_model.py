@@ -1,5 +1,3 @@
-# scripts/models/ridge_model.py
-
 from sklearn.linear_model import Ridge
 from scripts.core.logger import get_logger
 
@@ -7,6 +5,8 @@ logger = get_logger("RidgeModel")
 
 class RidgeModel:
     def __init__(self, alpha=1.0):
+        self.name = "Ridge"
+        self.alpha = alpha
         self.model = Ridge(alpha=alpha)
         logger.info(f"Inicializando Ridge con alpha={alpha}")
 
@@ -20,7 +20,7 @@ class RidgeModel:
 
     def predict(self, X):
         try:
-            return self.model.predict(X)
+            return self.model.predict(X).ravel()
         except Exception as e:
             logger.error(f"Error prediciendo con Ridge: {str(e)}")
             raise

@@ -2,53 +2,45 @@
 
 import os
 import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
 from sklearn.cross_decomposition import PLSRegression
 
-from scripts.core.logger import get_logger
-from scripts.core.utils import safe_read_csv, safe_create_dir
+from scripts.core.base_experiment import BaseExperiment
 from scripts.core.metrics import compute_metrics
+from scripts.core.logger import get_logger
+from scripts.core.utils import safe_create_dir
 
 logger = get_logger("PLSFinalExperiment")
 
 
-class PLSFinalExperiment:
+class PLSFinalExperiment(BaseExperiment):
+    """
+    Entrena un modelo PLS final usando el número óptimo de componentes
+    y evalúa en el conjunto de test.
+    """
 
-    def __init__(self, name, path, target_col, best_components, test_size=0.2, random_state=42):
-        self.name = name
-        self.path = path
-        self.target_col = target_col
+    def __init__(self, dataset, best_components):
+        super().__init__(name="PLS_FINAL", dataset=dataset)
         self.best_components = best_components
-        self.test_size = test_size
-        self.random_state = random_state
 
     def run(self):
-        logger.info(f"Entrenando PLS FINAL para {self.name} con {self.best_components} componentes")
+        logger.info(f"Entrenando PLS FINAL para dataset: {self.dataset} "
+                    f"con {self.best_components} componentes")
 
-        try:
-            df = safe_read_csv(self.path)
-        except Exception as e:
-            logger.error(f"Error cargando dataset: {str(e)}")
-            return
+        # 1. Preparar datos
+        self.prepare_data()
+
+        X_train = self.X_train
+        X_test = self.X_test
+        y_train = self.y_train
+        y_test = self.y_test
 
         safe_create_dir("results")
 
-        X = df.drop(columns=[self.target_col]).values
-        y = df[self.target_col].values
-
-        # División train/test
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y,
-            test_size=self.test_size,
-            random_state=self.random_state
-        )
-
-        # Entrenar modelo final
-        model = PLSRegression(n_components=self.best_components)
-
+        # 2. Entrenar modelo final
         try:
+            model = PLSRegression(n_components=self.best_components)
             model.fit(X_train, y_train)
+
             y_pred = model.predict(X_test)
 
             # Asegurar vector 1D
@@ -59,7 +51,7 @@ class PLSFinalExperiment:
             logger.error(f"Error entrenando PLS final: {str(e)}")
             return
 
-        # Calcular métricas completas
+        # 3. Calcular métricas
         try:
             metrics = compute_metrics(y_test, y_pred)
         except Exception as e:
@@ -68,8 +60,8 @@ class PLSFinalExperiment:
 
         metrics["model"] = f"PLS_FINAL_{self.best_components}_components"
 
-        # Guardar CSV
-        out_path = f"results/pls_final_results_{os.path.basename(self.path).replace('.csv','')}.csv"
+        # 4. Guardar resultados
+        out_path = f"results/pls_final_results_{self.dataset}.csv"
         pd.DataFrame([metrics]).to_csv(out_path, index=False)
 
         logger.info(f"Resultados PLS FINAL guardados en {out_path}")

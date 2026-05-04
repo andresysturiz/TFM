@@ -7,7 +7,11 @@ from scripts.core.logger import get_logger
 
 logger = get_logger("utils")
 
+
 def safe_read_csv(path):
+    """
+    Lectura segura de CSV con validación y logging.
+    """
     if not os.path.exists(path):
         logger.error(f"Archivo no encontrado: {path}")
         raise DatasetError(f"Archivo no encontrado: {path}")
@@ -27,6 +31,9 @@ def safe_read_csv(path):
 
 
 def safe_create_dir(path):
+    """
+    Crea un directorio de forma segura.
+    """
     try:
         os.makedirs(path, exist_ok=True)
         logger.info(f"Directorio creado/verificado: {path}")

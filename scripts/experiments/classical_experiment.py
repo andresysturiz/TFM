@@ -1,60 +1,76 @@
 # scripts/experiments/classical_experiment.py
 
+import os
+import pandas as pd
+
 from scripts.core.base_experiment import BaseExperiment
-from scripts.core.utils import safe_read_csv, safe_create_dir
-from scripts.core.scaler import Scaler
 from scripts.core.metrics import compute_metrics
 from scripts.models.ols_model import OLSModel
 from scripts.models.ridge_model import RidgeModel
 from scripts.models.lasso_model import LassoModel
 from scripts.models.pcr_model import PCRModel
 from scripts.core.logger import get_logger
-import pandas as pd
-import os
+from scripts.core.utils import safe_create_dir
 
 logger = get_logger("ClassicalExperiment")
 
+
 class ClassicalExperiment(BaseExperiment):
+    """
+    Ejecuta modelos clásicos de regresión:
+    - OLS
+    - Ridge
+    - Lasso
+    - PCR
+    sobre el dataset seleccionado.
+    """
+
+    def __init__(self, dataset):
+        super().__init__(name="Classical", dataset=dataset)
 
     def run(self):
-        logger.info(f"Iniciando métodos clásicos para {self.name}")
+        logger.info(f"Iniciando métodos clásicos para dataset: {self.dataset}")
 
-        try:
-            df = safe_read_csv(self.path)
-        except Exception as e:
-            logger.error(f"Error cargando dataset: {str(e)}")
-            return
+        # 1. Preparar datos
+        self.prepare_data()
+
+        X_train = self.X_train
+        X_test = self.X_test
+        y_train = self.y_train
+        y_test = self.y_test
 
         safe_create_dir("results")
 
-        X = df.drop(columns=[self.target_col]).values
-        y = df[self.target_col].values
-
-        scaler = Scaler()
-        Xs, ys = scaler.fit_transform(X, y)
-
+        # 2. Modelos clásicos
         models = {
             "OLS": OLSModel(),
             "Ridge": RidgeModel(),
             "Lasso": LassoModel(),
             "PCR": PCRModel(n_components=5)
         }
+
         results_list = []
 
+        # 3. Entrenar y evaluar cada modelo
         for name, model in models.items():
             try:
-                model.fit(Xs, ys)
-                pred = model.predict(Xs)
-                metrics = compute_metrics(ys, pred)
+                model.fit(X_train, y_train)
+                pred = model.predict(X_test)
+
+                metrics = compute_metrics(y_test, pred)
                 metrics["model"] = name
+
                 results_list.append(metrics)
-                logger.info(f"{self.name} | {name} | {metrics}")
+
+                logger.info(f"{self.dataset} | {name} | {metrics}")
+
             except Exception as e:
                 logger.error(f"Error ejecutando {name}: {str(e)}")
 
+        # 4. Guardar resultados
         df_out = pd.DataFrame(results_list)
 
-        out_path = f"results/classical_results_{os.path.basename(self.path).replace('.csv','')}.csv"
+        out_path = f"results/classical_results_{self.dataset}.csv"
         df_out.to_csv(out_path, index=False)
 
         logger.info(f"Resultados clásicos guardados en {out_path}")

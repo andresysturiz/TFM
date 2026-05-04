@@ -7,3 +7,7 @@ class DatasetError(Exception):
 class DownloadError(Exception):
     """Error relacionado con la descarga de datos."""
     pass
+
+class ModelError(Exception):
+    """Error relacionado con el entrenamiento o predicción de modelos."""
+    pass

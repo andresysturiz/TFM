@@ -9,6 +9,10 @@ def get_logger(name):
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
 
+    # Evitar añadir handlers duplicados
+    if logger.hasHandlers():
+        return logger
+
     # Formato
     formatter = logging.Formatter(
         "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

@@ -1,3 +1,8 @@
+# NOTA:
+# Este Scaler ya no se usa en el pipeline principal porque el preprocesado
+# se realiza en preprocess_regression() y preprocess_golub().
+# Se mantiene por si se añaden modelos que requieran escalar y.
+
 from sklearn.preprocessing import StandardScaler
 
 class Scaler:
