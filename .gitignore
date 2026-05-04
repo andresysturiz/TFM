@@ -1,34 +1,28 @@
-# --- PYTHON ---
+# Python
 venv/
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
 
-# --- JUPYTER ---
-.ipynb_checkpoints/
+# Data
+data/raw/
+data/processed/
 
-# --- R ---
+# R
 .Rhistory
 .RData
-.Rproj.user/
-.Ruserdata
+renv/library/
+renv/staging/
+renv.lock
 
-# --- MACOS ---
+# LaTeX build
+docs/*.aux
+docs/*.log
+docs/*.bbl
+docs/*.blg
+docs/*.out
+docs/*.toc
+docs/main.pdf
+
+# OS
 .DS_Store
-.AppleDouble
-.LSOverride
-.Spotlight-V100
-.Trashes
-
-# --- VS CODE ---
-.vscode/
-
-# --- PROJECT STRUCTURE ---
-logs/
-figures/
-results/
-
-# --- DATA ---
-# Ignorar procesados, NO ignorar raw
-data/processed/
+Thumbs.db

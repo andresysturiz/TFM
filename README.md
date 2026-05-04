@@ -1,163 +1,171 @@
-<<<<<<< HEAD
-# TFM
-Ejecucion de modelos lineales clasicos vs al pls
-=======
-# 📘 Trabajo Fin de Máster  
-## Comparación de Partial Least Squares (PLS) con métodos clásicos de regresión  
-### Aplicación a los datasets *Wine Quality* y *Airfoil Self‑Noise*
+# 📘 TFM — Regresión por Mínimos Cuadrados Parciales (PLS)
+### *Tratamiento computacional y comparación con métodos clásicos*
 
-Este repositorio contiene todo el código, datos, documentación y resultados generados durante el desarrollo del Trabajo Fin de Máster del Máster en Estadística Aplicada.  
-El objetivo principal es comparar el rendimiento e interpretabilidad de **Partial Least Squares (PLS)** frente a métodos clásicos de regresión en dos dominios distintos: química y aeroacústica.
+Este repositorio contiene el código completo del Trabajo Fin de Máster del **Máster en Estadística Aplicada (UGR)**, centrado en:
+
+- Implementación rigurosa de **Partial Least Squares Regression (PLS)**.  
+- Selección óptima de componentes mediante **validación cruzada real**.  
+- Comparación con modelos clásicos: **OLS, Ridge, Lasso, PCR**.  
+- Aplicación a tres datasets representativos:  
+  - **Tecator** (quimiometría, espectros NIR)  
+  - **Gasoline** (octanaje, espectros NIR)  
+  - **Riboflavin** (alta dimensionalidad p≫n, genómica)
+
+El proyecto está empaquetado como un **wheel instalable**, permitiendo reproducir todos los resultados con un solo comando.
 
 ---
 
-# 📁 Estructura del repositorio
+## 🚀 Instalación
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/<usuario>/repo_TFM.git
+cd repo_TFM
+```
+
+### 2. Crear entorno virtual (opcional)
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Instalar el paquete desde el wheel
+
+```bash
+pip install dist/repo_tfm-0.1.0-py3-none-any.whl
+```
+
+O instalarlo directamente desde el repositorio:
+
+```bash
+pip install .
+```
+
+---
+
+## ▶️ Ejecución del pipeline completo
+
+Una vez instalado, basta con ejecutar:
+
+```bash
+python -m repo_tfm
+```
+
+Esto lanzará automáticamente:
+
+- carga de los datasets  
+- validación cruzada PLS (PLS_CV)  
+- entrenamiento del modelo final PLS (PLS_FINAL)  
+- ejecución de modelos clásicos  
+- comparación final  
+- generación de métricas y gráficos  
+
+Los resultados se guardarán en:
+
+```
+results/<dataset>/
+    ├── csv/
+    └── figures/
+```
+
+---
+
+## 📁 Estructura del proyecto
 
 ```
 repo_TFM/
- ├── data/
- │   ├── raw/          # Datos originales descargados desde UCI
- │   └── processed/    # Datos preprocesados (escalados, folds, etc.)
- ├── scripts/          # Scripts ejecutables del pipeline
- ├── notebooks/        # Notebooks de análisis y visualización
- ├── figures/          # Gráficos generados para el TFM
- ├── docs/             # Documentación adicional
- ├── references/       # Artículos y bibliografía
- ├── pyproject.toml    # Gestión de dependencias (Poetry)
- ├── poetry.lock
- └── README.md         # Este archivo
+├── data/
+│   ├── raw/                # Datasets originales
+│   └── processed/          # (opcional) datos transformados
+│
+├── dist/                   # Wheel generado
+│   ├── repo_tfm-0.1.0-py3-none-any.whl
+│   └── repo_tfm-0.1.0.tar.gz
+│
+├── results/                # Resultados generados automáticamente
+│   ├── gasoline/
+│   ├── riboflavin/
+│   └── tecator/
+│
+├── src/repo_tfm/
+│   ├── main.py             # Pipeline principal
+│   └── scripts/
+│       ├── core/           # Utilidades internas
+│       └── experiments/    # Experimentos PLS y modelos clásicos
+│
+├── notebooks/              # Análisis visual opcional
+├── references/             # Bibliografía
+├── docs/                   # Documentación adicional
+└── README.md
 ```
 
 ---
 
-# 🎯 Objetivo del proyecto
+## 📊 Datasets incluidos
 
-Evaluar el comportamiento de **PLS** frente a métodos clásicos de regresresión:
-
-- **OLS (Regresión lineal)**
-- **Ridge**
-- **Lasso**
-- **PCR (Principal Component Regression)**
-- **Random Forest Regressor** (como referencia no lineal)
-
-Se analizan dos datasets con naturaleza física distinta:
-
-1. **Wine Quality** → dominio químico  
-2. **Airfoil Self‑Noise** → dominio aeroacústico  
-
-Esto permite estudiar la robustez, interpretabilidad y estabilidad de PLS en contextos variados.
+| Dataset | n | p | Dominio | Objetivo |
+|--------|---|---|----------|----------|
+| **Tecator** | 215 | 100 | Quimiometría | Predicción de grasa (`fat`) |
+| **Gasoline** | 60 | 401 | Quimiometría | Predicción de octanaje |
+| **Riboflavin** | 71 | 4088 | Genómica (p≫n) | Producción de riboflavina (`x`) |
 
 ---
 
-# 📊 Datasets
+## 🤖 Modelos implementados
 
-Los datasets utilizados provienen del **UCI Machine Learning Repository** y se documentan en detalle en:
-
-```
-data/README.md
-```
-
-Los datos se descargan automáticamente mediante:
-
-```
-python scripts/download_datasets.py
-```
+| Modelo | Descripción |
+|--------|-------------|
+| **PLS_CV** | Selección óptima de componentes mediante validación cruzada real |
+| **PLS_FINAL** | Entrenamiento final con el número óptimo de componentes |
+| **PCR** | PCA + regresión |
+| **OLS** | Regresión lineal clásica |
+| **Ridge** | Regularización L2 |
+| **Lasso** | Regularización L1 |
 
 ---
 
-# 🛠️ Pipeline del proyecto
+## 📈 Resultados esperados (resumen)
 
-El flujo de trabajo completo se organiza mediante scripts en `scripts/`:
-
-- `download_datasets.py` → descarga y guarda los datos en `data/raw/`
-- `preprocess.py` → limpieza, escalado y generación de datos procesados
-- `export_folds.py` → creación de folds reproducibles para CV
-- `pls_cv.py` → ajuste de modelos PLS con validación cruzada
-- `compare_methods.py` → comparación con métodos clásicos
-- `utils/` (si aplica) → funciones auxiliares
-
-Los análisis exploratorios, visualizaciones y resultados interpretables se encuentran en:
-
-```
-notebooks/
-```
+| Dataset | Mejor modelo | Interpretación |
+|---------|--------------|----------------|
+| **Gasoline** | OLS | Estructura lineal fuerte; OLS domina. |
+| **Tecator** | PLS (5 comp.) | Dataset clásico donde PLS es superior. |
+| **Riboflavin** | Lasso | p≫n extremo; sparsity domina. |
 
 ---
 
-# 📦 Dependencias
+## 🧪 Cómo extender el proyecto
 
-El proyecto utiliza **Poetry** para la gestión de entornos y dependencias.
+### Añadir un nuevo dataset
+1. Colocar el archivo en `data/raw/`.
+2. Añadir un método en `data_loader.py`.
+3. Añadir el nombre en `main.py`.
 
-Para instalar el entorno:
-
-```
-poetry install
-```
-
-Para activar el entorno virtual:
-
-```
-poetry shell
-```
+### Añadir un nuevo modelo
+1. Crear un archivo en `scripts/experiments/`.
+2. Implementar `.run()`.
+3. Añadirlo en `compare_runner.py`.
 
 ---
 
-# 📈 Resultados
+## 📚 Referencias clave
 
-Los resultados (tablas, métricas, gráficos) se almacenan en:
-
-```
-figures/
-results/   (si se añade)
-```
-
-Incluyen:
-
-- Comparación de MSE, RMSE, R² entre modelos  
-- Selección óptima de componentes en PLS  
-- Loadings, scores y análisis interpretativo  
-- Comparación entre dominios (química vs aeroacústica)
+- Geladi & Kowalski (1986). *Partial Least Squares: A Tutorial*.  
+- Frank & Friedman (1993). *A Statistical View of Chemometrics Tools*.  
+- Hastie, Tibshirani & Friedman (2009). *The Elements of Statistical Learning*.  
 
 ---
 
-# 📚 Referencias
+## 📝 Licencia
 
-Las referencias bibliográficas utilizadas en el TFM se encuentran en:
-
-```
-references/
-```
-
-Incluyen artículos sobre:
-
-- Partial Least Squares  
-- PCR  
-- Comparaciones metodológicas  
-- Aplicaciones en química y aeroacústica  
+Este proyecto se distribuye con fines académicos para reproducibilidad del TFM.
 
 ---
 
-# 🔄 Reproducibilidad
+## 🙌 Contacto
 
-Para reproducir el proyecto desde cero:
-
-1. Clonar el repositorio  
-2. Instalar dependencias con Poetry  
-3. Descargar los datos  
-4. Ejecutar el pipeline o abrir los notebooks  
-
-```
-poetry install
-poetry shell
-python scripts/download_datasets.py
-```
-
----
-
-# 📝 Licencia
-
-Los datasets utilizados son públicos y provienen del **UCI Machine Learning Repository**.  
-El código del proyecto se utiliza exclusivamente con fines académicos.
-
-```
->>>>>>> a7db1b3 (Añadida carpeta R y scripts iniciales)
+**Autor:** Andrés  
+**Máster:** Estadística Aplicada (UGR)  
+**Año:** 2025–2026  
