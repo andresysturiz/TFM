@@ -27,7 +27,7 @@ El proyecto está empaquetado como un **wheel instalable**, lo que permite repro
 ### 1. Clonar el repositorio
 
 ```bash
-git clone [https://github.com/andresysturiz/repo_TFM.git](https://github.com/andresysturiz/TFM.git)
+git clone https://github.com/andresysturiz/repo_TFM.git
 cd repo_TFM
 ```
 
