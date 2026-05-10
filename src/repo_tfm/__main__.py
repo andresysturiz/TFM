@@ -1,5 +1,3 @@
-def main():
-    print("Inicio ejecución del Repositorio")
+from repo_tfm.main import main
 
-if __name__ == "__main__":
-    main()
+main()
