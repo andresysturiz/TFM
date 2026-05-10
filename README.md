@@ -20,6 +20,30 @@ El proyecto está empaquetado como un **wheel instalable**, lo que permite repro
 - **Python 3.10, 3.11 o 3.12**  
   (recomendado: **Python 3.11** por compatibilidad con librerías científicas)
 
+- **R (>= 4.0)**  
+  Necesario para descargar y exportar automáticamente el dataset **Gasoline** desde CRAN.
+
+- **Git**  
+  Necesario para clonar el repositorio.
+
+---
+
+## 📦 Dependencias de R
+
+El proyecto utiliza el paquete `pls` de R para descargar y exportar el dataset `gasoline`.
+
+Instalar ejecutando:
+
+```bash
+Rscript -e "dir.create(Sys.getenv('R_LIBS_USER'), recursive=TRUE, showWarnings=FALSE); install.packages('pls', repos='https://cloud.r-project.org', lib=Sys.getenv('R_LIBS_USER'))"
+```
+
+Comprobar instalación:
+
+```bash
+Rscript -e "library(pls)"
+```
+
 ---
 
 ## 🚀 Instalación
