@@ -15,6 +15,13 @@ El proyecto está empaquetado como un **wheel instalable**, lo que permite repro
 
 ---
 
+## 🐍 Requisitos
+
+- **Python 3.10, 3.11 o 3.12**  
+  (recomendado: **Python 3.10** por compatibilidad con librerías científicas)
+
+---
+
 ## 🚀 Instalación
 
 ### 1. Clonar el repositorio
@@ -77,29 +84,28 @@ results/<dataset>/
 ## 📁 Estructura del proyecto
 
 ```
-repo_TFM/
+repo_tfm/
 ├── data/
-│   ├── raw/                # Datasets originales
-│   └── processed/          # (opcional) datos transformados
-│
-├── dist/                   # Wheel generado
-│   ├── repo_tfm-0.1.0-py3-none-any.whl
-│   └── repo_tfm-0.1.0.tar.gz
-│
-├── results/                # Resultados generados automáticamente
-│   ├── gasoline/
-│   ├── riboflavin/
-│   └── tecator/
+│   └── raw/                        # Datasets originales
 │
 ├── src/repo_tfm/
-│   ├── main.py             # Pipeline principal
-│   └── scripts/
-│       ├── core/           # Utilidades internas
-│       └── experiments/    # Experimentos PLS y modelos clásicos
+│   ├── main.py                     # Pipeline principal
+│   ├── scripts/
+│   │   ├── core/                   # Utilidades internas (EDA, métricas, logger, etc.)
+│   │   ├── models/                 # Modelos implementados
+│   │   │   ├── ols_model.py
+│   │   │   ├── ridge_model.py
+│   │   │   ├── lasso_model.py
+│   │   │   ├── pcr_model.py
+│   │   │   └── pls_model.py
+│   │   ├── experiments/            # Ejecución de experimentos
+│   │   │   ├── classical_experiment.py
+│   │   │   ├── pls_experiment.py
+│   │   │   └── pls_final_experiment.py
+│   │   └── compare_runner.py       # Orquestador de comparaciones
 │
-├── notebooks/              # Análisis visual opcional
-├── references/             # Documentación interna del proyecto
-├── docs/                   # Información adicional
+├── results/                        # Resultados generados automáticamente
+├── dist/                           # Wheel y distribución
 └── README.md
 ```
 
@@ -146,9 +152,9 @@ repo_TFM/
 3. Registrar el dataset en `main.py`.
 
 ### Añadir un nuevo modelo
-1. Crear un archivo en `scripts/experiments/`.  
-2. Implementar el método `.run()`.  
-3. Añadirlo en `compare_runner.py`.
+1. Crear un archivo en `scripts/models/`.  
+2. Implementar la clase del modelo.  
+3. Integrarlo en los experimentos y en `compare_runner.py`.
 
 ---
 
