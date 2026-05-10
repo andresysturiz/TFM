@@ -33,8 +33,15 @@ cd repo_TFM
 
 ### 2. (Opcional) Crear un entorno virtual
 
+Desde MAC:
 ```bash
 python3 -m venv venv
+source venv/bin/activate
+```
+
+Desde Windows:
+```bash
+py -m venv venv
 source venv/bin/activate
 ```
 
