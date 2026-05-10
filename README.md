@@ -18,7 +18,7 @@ El proyecto está empaquetado como un **wheel instalable**, lo que permite repro
 ## 🐍 Requisitos
 
 - **Python 3.10, 3.11 o 3.12**  
-  (recomendado: **Python 3.10** por compatibilidad con librerías científicas)
+  (recomendado: **Python 3.11** por compatibilidad con librerías científicas)
 
 ---
 
@@ -42,7 +42,7 @@ source venv/bin/activate
 Desde Windows:
 ```bash
 py -m venv venv
-source venv/bin/activate
+venv\scripts\activate.bat
 ```
 
 ### 3. Instalar el paquete
