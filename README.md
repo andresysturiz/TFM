@@ -133,6 +133,7 @@ repo_tfm/
 │   │   │   ├── classical_experiment.py
 │   │   │   ├── pls_experiment.py
 │   │   │   └── pls_final_experiment.py
+│   │   ├── download_datasets.py    # Descarga los dataset desde el origen
 │   │   └── compare_runner.py       # Orquestador de comparaciones
 │
 ├── results/                        # Resultados generados automáticamente
