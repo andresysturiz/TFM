@@ -16,9 +16,9 @@ class DataLoader:
     def __init__(self, base_path="data/raw"):
         self.base_path = base_path
 
-    # -------------------------
+
     # MÉTODO PRINCIPAL
-    # -------------------------
+
     def load(self, name):
         name = name.lower()
 
@@ -33,9 +33,9 @@ class DataLoader:
 
         raise ValueError(f"Dataset '{name}' no está soportado.")
 
-    # -------------------------
-    # GASOLINE (regresión)
-    # -------------------------
+
+    # GASOLINE 
+
     def _load_gasoline(self):
         path = f"{self.base_path}/gasoline.csv"
         df = safe_read_csv(path)
@@ -49,18 +49,18 @@ class DataLoader:
         logger.info(f"Gasoline cargado: {df.shape[0]} filas, {df.shape[1]} columnas")
         return df, X, y
 
-    # -------------------------
-    # TECATOR (regresión)
-    # -------------------------
+
+    # TECATOR
+
     def _load_tecator(self):
         path = f"{self.base_path}/tecator.csv"
         df = safe_read_csv(path)
 
-        # Objetivo estándar
+
         if "fat" not in df.columns:
             raise ValueError("El dataset Tecator no contiene la columna 'fat'.")
 
-        # Usamos solo absorbancias como predictores
+
         feature_cols = [c for c in df.columns if c.startswith("absorbance_")]
 
         X = df[feature_cols].values
@@ -70,9 +70,9 @@ class DataLoader:
         return df, X, y
 
 
-    # -------------------------
-    # RIBOFLAVIN (regresión)
-    # -------------------------
+
+    # RIBOFLAVIN
+    
     def _load_riboflavin(self):
         path = f"{self.base_path}/riboflavin.csv"
         df = safe_read_csv(path)

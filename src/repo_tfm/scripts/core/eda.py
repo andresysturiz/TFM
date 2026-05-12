@@ -31,9 +31,9 @@ class DatasetAnalyzer:
 
         logger.info(f"=== Iniciando EDA para dataset: {dataset_name} ===")
 
-        # ============================================================
+
         # 1. Información estructural
-        # ============================================================
+
 
         info = {
             "n_observaciones": df.shape[0],
@@ -45,9 +45,9 @@ class DatasetAnalyzer:
         pd.DataFrame([info]).to_csv(info_path, index=False)
         logger.info(f"Información estructural guardada en {info_path}")
 
-        # ============================================================
+
         # 2. Estadísticos descriptivos ampliados
-        # ============================================================
+
 
         desc = df.describe().T
         desc["coef_var"] = desc["std"] / desc["mean"]
@@ -58,18 +58,18 @@ class DatasetAnalyzer:
         desc.to_csv(summary_path)
         logger.info(f"Resumen estadístico guardado en {summary_path}")
 
-        # ============================================================
+ 
         # 3. Valores faltantes
-        # ============================================================
+
 
         missing = df.isna().sum()
         missing_path = f"{base_dir}/eda_{dataset_name}_missing.csv"
         missing.to_csv(missing_path)
         logger.info(f"Valores faltantes guardados en {missing_path}")
 
-        # ============================================================
+
         # 4. Correlación media con el target
-        # ============================================================
+
 
         if target is not None:
             corrs = df.corr(numeric_only=True)[target].drop(target)
@@ -82,9 +82,9 @@ class DatasetAnalyzer:
             pd.DataFrame([corr_info]).to_csv(corr_path, index=False)
             logger.info(f"Correlación con target guardada en {corr_path}")
 
-        # ============================================================
+
         # 5. Gráficos mínimos
-        # ============================================================
+
 
         if target is not None:
             self._plot_target(df, dataset_name, target, base_dir)
@@ -99,9 +99,9 @@ class DatasetAnalyzer:
 
         logger.info(f"=== EDA finalizado para {dataset_name} ===")
 
-    # ============================================================
+
     # FUNCIONES AUXILIARES
-    # ============================================================
+
 
     def _plot_target(self, df, dataset_name, target, base_dir):
         y = df[target]
