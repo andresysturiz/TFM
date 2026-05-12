@@ -18,9 +18,7 @@ logger = get_logger("download")
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-# ============================================================
-# DESCARGA DESDE R (solo para Gasoline)
-# ============================================================
+# DESCARGA DESDE R (solo para Gasoline) 
 
 def download_from_r(script_name: str, output_name: str, target_name: str):
     """
@@ -42,9 +40,7 @@ def download_from_r(script_name: str, output_name: str, target_name: str):
         raise DownloadError(f"No se pudo descargar {target_name}")
 
 
-# ============================================================
-# DESCARGA DESDE OPENML
-# ============================================================
+# DESCARGA DESDE OPENML 
 
 def download_from_openml(dataset_name: str, output_filename: str):
     logger.info(f"Descargando {dataset_name} desde OpenML...")
@@ -70,25 +66,22 @@ def download_from_openml(dataset_name: str, output_filename: str):
         raise DownloadError(f"No se pudo descargar {dataset_name}")
 
 
-
-# ============================================================
-# MAIN
-# ============================================================
+# MAIN 
 
 def main():
     safe_create_dir("data/raw")
 
-    # 1. Tecator (OpenML)
+    # 1. Tecator 
     download_from_openml("tecator", "tecator.csv")
 
-    # 2. Gasoline (R)
+    # 2. Gasoline 
     download_from_r(
         script_name="export_gasoline.R",
         output_name="gasoline.csv",
         target_name="gasoline.csv"
     )
 
-    # 3. Riboflavin (OpenML)
+    # 3. Riboflavin 
     download_from_openml("riboflavin", "riboflavin.csv")
 
     logger.info("Descarga completada correctamente.")

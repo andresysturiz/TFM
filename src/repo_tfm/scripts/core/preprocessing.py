@@ -8,9 +8,8 @@ from src.repo_tfm.scripts.core.logger import get_logger
 logger = get_logger("Preprocessing")
 
 
-# ============================================================
-# PREPROCESADO PARA REGRESIÓN (Gasoline, Tecator, Riboflavin)
-# ============================================================
+# PREPROCESADO PARA REGRESIÓN
+
 
 def preprocess_regression(X, y, test_size=0.2, random_state=42):
     """
