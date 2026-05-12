@@ -10,8 +10,7 @@ logger = get_logger("experiment")
 
 class BaseExperiment(ABC):
     """
-    Clase base para experimentos de REGRESIÓN.
-    Gestiona:
+    Clase Gestiona:
     - carga del dataset
     - preprocesado (solo regresión)
     - división train/test
@@ -20,23 +19,22 @@ class BaseExperiment(ABC):
 
     def __init__(self, name, dataset):
         """
-        name: nombre del experimento (PLS, Classical, etc.)
-        dataset: nombre del dataset ("gasoline", "tecator", "riboflavin")
+        name: nombre del experimento 
+        dataset: nombre del dataset 
         """
         self.name = name
         self.dataset = dataset
         self.loader = DataLoader()
 
-        # Se rellenan en prepare_data()
         self.df = None
         self.X_train = None
         self.X_test = None
         self.y_train = None
         self.y_test = None
 
-    # -------------------------
-    # PREPARACIÓN DE DATOS (solo regresión)
-    # -------------------------
+
+    # PREPARACIÓN DE DATOS 
+
     def prepare_data(self):
         logger.info(f"Preparando datos para dataset: {self.dataset}")
 
@@ -49,9 +47,9 @@ class BaseExperiment(ABC):
 
         logger.info("Dataset de regresión preprocesado correctamente.")
 
-    # -------------------------
+
     # MÉTODO PRINCIPAL
-    # -------------------------
+
     @abstractmethod
     def run(self):
         """

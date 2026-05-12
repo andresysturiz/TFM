@@ -10,11 +10,16 @@ from src.repo_tfm.scripts.experiments.pls_experiment import PLSExperiment
 from src.repo_tfm.scripts.experiments.pls_final_experiment import PLSFinalExperiment
 from src.repo_tfm.scripts.experiments.classical_experiment import ClassicalExperiment
 from src.repo_tfm.scripts.compare_runner import compare_results
+from src.repo_tfm.scripts.download_datasets import main as download_datasets
 
 logger = get_logger("MainPipeline")
 
 
 def run_pipeline_for_dataset(dataset):
+    logger.info(f"=== Descargando dataset: {dataset} ===")
+
+    download_datasets()
+    
     logger.info(f"=== Procesando dataset: {dataset} ===")
 
     # ============================

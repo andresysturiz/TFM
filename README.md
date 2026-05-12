@@ -1,17 +1,48 @@
-# 📘 TFM — Regresión por Mínimos Cuadrados Parciales (PLS)
+# 📘 TFM — Regresión por Mínimos Cuadrados Parciales (PLS)  
 ### *Tratamiento computacional y comparación con métodos clásicos*
 
-Este repositorio contiene el código completo del Trabajo Fin de Máster del **Máster en Estadística Aplicada (UGR)**, centrado en:
+Este repositorio contiene el código completo y reproducible del Trabajo Fin de Máster del **Máster en Estadística Aplicada (UGR)**. El proyecto implementa un pipeline robusto para:
 
-- Implementación rigurosa de **Partial Least Squares Regression (PLS)**.  
-- Selección óptima de componentes mediante **validación cruzada real**.  
-- Comparación con modelos clásicos: **OLS, Ridge, Lasso, PCR**.  
-- Aplicación a tres datasets representativos:  
+- Ajustar modelos de **Partial Least Squares Regression (PLS)**.  
+- Seleccionar el número óptimo de componentes mediante **validación cruzada real**.  
+- Comparar PLS con métodos lineales clásicos: **OLS, Ridge, Lasso y PCR**.  
+- Ejecutar el análisis sobre tres datasets representativos:  
   - **Tecator** (quimiometría, espectros NIR)  
   - **Gasoline** (octanaje, espectros NIR)  
   - **Riboflavin** (alta dimensionalidad p≫n, genómica)
 
-El proyecto está empaquetado como un **wheel instalable**, permitiendo reproducir todos los resultados con un solo comando.
+El proyecto está empaquetado como un **wheel instalable**, lo que permite reproducir todos los resultados con un único comando.
+
+---
+
+## 🐍 Requisitos
+
+- **Python 3.10, 3.11 o 3.12**  
+  (recomendado: **Python 3.11** por compatibilidad con librerías científicas)
+
+- **R (>= 4.0)**  
+  Necesario para descargar y exportar automáticamente el dataset **Gasoline** desde CRAN.
+
+- **Git**  
+  Necesario para clonar el repositorio.
+
+---
+
+## 📦 Dependencias de R
+
+El proyecto utiliza el paquete `pls` de R para descargar y exportar el dataset `gasoline`.
+
+Instalar ejecutando:
+
+```bash
+Rscript -e "dir.create(Sys.getenv('R_LIBS_USER'), recursive=TRUE, showWarnings=FALSE); install.packages('pls', repos='https://cloud.r-project.org', lib=Sys.getenv('R_LIBS_USER'))"
+```
+
+Comprobar instalación:
+
+```bash
+Rscript -e "library(pls)"
+```
 
 ---
 
@@ -20,24 +51,33 @@ El proyecto está empaquetado como un **wheel instalable**, permitiendo reproduc
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/<usuario>/repo_TFM.git
+git clone https://github.com/andresysturiz/TFM.git
 cd repo_TFM
 ```
 
-### 2. Crear entorno virtual (opcional)
+### 2. (Opcional) Crear un entorno virtual
 
+Desde MAC:
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Instalar el paquete desde el wheel
+Desde Windows:
+```bash
+py -m venv venv
+venv\scripts\activate.bat
+```
+
+### 3. Instalar el paquete
+
+Desde el wheel:
 
 ```bash
 pip install dist/repo_tfm-0.1.0-py3-none-any.whl
 ```
 
-O instalarlo directamente desde el repositorio:
+O directamente desde el repositorio:
 
 ```bash
 pip install .
@@ -56,10 +96,10 @@ python -m repo_tfm
 Esto lanzará automáticamente:
 
 - carga de los datasets  
-- validación cruzada PLS (PLS_CV)  
-- entrenamiento del modelo final PLS (PLS_FINAL)  
+- validación cruzada para PLS  
+- entrenamiento del modelo final  
 - ejecución de modelos clásicos  
-- comparación final  
+- comparación de resultados  
 - generación de métricas y gráficos  
 
 Los resultados se guardarán en:
@@ -75,29 +115,29 @@ results/<dataset>/
 ## 📁 Estructura del proyecto
 
 ```
-repo_TFM/
+repo_tfm/
 ├── data/
-│   ├── raw/                # Datasets originales
-│   └── processed/          # (opcional) datos transformados
-│
-├── dist/                   # Wheel generado
-│   ├── repo_tfm-0.1.0-py3-none-any.whl
-│   └── repo_tfm-0.1.0.tar.gz
-│
-├── results/                # Resultados generados automáticamente
-│   ├── gasoline/
-│   ├── riboflavin/
-│   └── tecator/
+│   └── raw/                        # Datasets originales
 │
 ├── src/repo_tfm/
-│   ├── main.py             # Pipeline principal
-│   └── scripts/
-│       ├── core/           # Utilidades internas
-│       └── experiments/    # Experimentos PLS y modelos clásicos
+│   ├── main.py                     # Pipeline principal
+│   ├── scripts/
+│   │   ├── core/                   # Utilidades internas (EDA, métricas, logger, etc.)
+│   │   ├── models/                 # Modelos implementados
+│   │   │   ├── ols_model.py
+│   │   │   ├── ridge_model.py
+│   │   │   ├── lasso_model.py
+│   │   │   ├── pcr_model.py
+│   │   │   └── pls_model.py
+│   │   ├── experiments/            # Ejecución de experimentos
+│   │   │   ├── classical_experiment.py
+│   │   │   ├── pls_experiment.py
+│   │   │   └── pls_final_experiment.py
+│   │   ├── download_datasets.py    # Descarga los dataset desde el origen
+│   │   └── compare_runner.py       # Orquestador de comparaciones
 │
-├── notebooks/              # Análisis visual opcional
-├── references/             # Bibliografía
-├── docs/                   # Documentación adicional
+├── results/                        # Resultados generados automáticamente
+├── dist/                           # Wheel y distribución
 └── README.md
 ```
 
@@ -109,7 +149,7 @@ repo_TFM/
 |--------|---|---|----------|----------|
 | **Tecator** | 215 | 100 | Quimiometría | Predicción de grasa (`fat`) |
 | **Gasoline** | 60 | 401 | Quimiometría | Predicción de octanaje |
-| **Riboflavin** | 71 | 4088 | Genómica (p≫n) | Producción de riboflavina (`x`) |
+| **Riboflavin** | 71 | 4088 | Genómica | Producción de riboflavina |
 
 ---
 
@@ -117,7 +157,7 @@ repo_TFM/
 
 | Modelo | Descripción |
 |--------|-------------|
-| **PLS_CV** | Selección óptima de componentes mediante validación cruzada real |
+| **PLS_CV** | Selección óptima de componentes mediante validación cruzada |
 | **PLS_FINAL** | Entrenamiento final con el número óptimo de componentes |
 | **PCR** | PCA + regresión |
 | **OLS** | Regresión lineal clásica |
@@ -130,37 +170,29 @@ repo_TFM/
 
 | Dataset | Mejor modelo | Interpretación |
 |---------|--------------|----------------|
-| **Gasoline** | OLS | Estructura lineal fuerte; OLS domina. |
-| **Tecator** | PLS (5 comp.) | Dataset clásico donde PLS es superior. |
-| **Riboflavin** | Lasso | p≫n extremo; sparsity domina. |
+| **Gasoline** | OLS | Estructura lineal fuerte. |
+| **Tecator** | PLS (≈5 comp.) | Caso clásico donde PLS domina. |
+| **Riboflavin** | Lasso | p≫n extremo; sparsity es clave. |
 
 ---
 
 ## 🧪 Cómo extender el proyecto
 
 ### Añadir un nuevo dataset
-1. Colocar el archivo en `data/raw/`.
-2. Añadir un método en `data_loader.py`.
-3. Añadir el nombre en `main.py`.
+1. Colocar el archivo en `data/raw/`.  
+2. Añadir un método de carga en `data_loader.py`.  
+3. Registrar el dataset en `main.py`.
 
 ### Añadir un nuevo modelo
-1. Crear un archivo en `scripts/experiments/`.
-2. Implementar `.run()`.
-3. Añadirlo en `compare_runner.py`.
-
----
-
-## 📚 Referencias clave
-
-- Geladi & Kowalski (1986). *Partial Least Squares: A Tutorial*.  
-- Frank & Friedman (1993). *A Statistical View of Chemometrics Tools*.  
-- Hastie, Tibshirani & Friedman (2009). *The Elements of Statistical Learning*.  
+1. Crear un archivo en `scripts/models/`.  
+2. Implementar la clase del modelo.  
+3. Integrarlo en los experimentos y en `compare_runner.py`.
 
 ---
 
 ## 📝 Licencia
 
-Este proyecto se distribuye con fines académicos para reproducibilidad del TFM.
+Proyecto distribuido con fines académicos para garantizar reproducibilidad.
 
 ---
 

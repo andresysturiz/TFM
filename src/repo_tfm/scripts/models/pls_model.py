@@ -20,9 +20,8 @@ class PLSModel:
         self.best_components_ = None
         self.is_classification = False
 
-    # ============================================================
-    # Selección automática de componentes
-    # ============================================================
+    # Selección automática de componentes 
+
 
     def _select_components_cv(self, X, y):
         logger.info("Seleccionando número óptimo de componentes para PLS...")
@@ -53,7 +52,6 @@ class PLSModel:
                         np.sqrt(mean_squared_error(y_val, pred))
                     )
 
-            # Para clasificación queremos maximizar AUC
             # Para regresión queremos minimizar RMSE
             if self.is_classification:
                 scores.append(np.mean(fold_scores))
@@ -67,10 +65,9 @@ class PLSModel:
 
         logger.info(f"Mejor número de componentes: {best_n}")
         return best_n
+    
 
-    # ============================================================
-    # Entrenamiento
-    # ============================================================
+    # Entrenamiento 
 
     def fit(self, X, y):
         try:
@@ -94,9 +91,8 @@ class PLSModel:
             logger.error(f"Error ajustando PLS: {str(e)}")
             raise
 
-    # ============================================================
-    # Predicción
-    # ============================================================
+
+    # Predicción 
 
     def predict(self, X):
         try:

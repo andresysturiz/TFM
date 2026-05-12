@@ -1,4 +1,4 @@
-# scripts/compare_runner.py  (VERSIÓN PRO CON PLS AUTO)
+# scripts/compare_runner.py 
 
 import os
 import pandas as pd
@@ -12,9 +12,8 @@ from src.repo_tfm.scripts.core.errors import DatasetError
 logger = get_logger("CompareRunner")
 
 
-# ============================================================
-# CARGA SEGURA DE RESULTADOS
-# ============================================================
+
+# CARGA SEGURA DE RESULTADOS 
 
 def load_results(path):
     if not os.path.exists(path):
@@ -30,9 +29,7 @@ def load_results(path):
         raise DatasetError(f"Error leyendo {path}")
 
 
-# ============================================================
-# FUNCIÓN PRINCIPAL
-# ============================================================
+# FUNCIÓN PRINCIPAL 
 
 def compare_results(dataset):
     logger.info(f"Comparando resultados para dataset: {dataset}")
@@ -48,41 +45,8 @@ def compare_results(dataset):
     safe_create_dir(csv_dir)
     safe_create_dir(fig_dir)
 
-    # ============================================================
-    # CASO ESPECIAL: GOLUB (CLASIFICACIÓN)
-    # ============================================================
-    if dataset == "golub":
-        logger.info("Modo clasificación detectado: procesando Golub")
 
-        classical_path = f"{csv_dir}/classical_results_{dataset}.csv"
-        df = load_results(classical_path)
-
-        # Mostrar best_components si existe
-        if "best_components" in df.columns:
-            for _, row in df.iterrows():
-                if not pd.isna(row.get("best_components", None)):
-                    logger.info(
-                        f"Modelo {row['model']} seleccionó {int(row['best_components'])} componentes"
-                    )
-
-        # Guardar tabla comparativa
-        out_csv = f"{csv_dir}/comparison_{dataset}.csv"
-        df.to_csv(out_csv, index=False)
-        logger.info(f"Tabla comparativa guardada en {out_csv}")
-
-        # Guardar LaTeX
-        out_tex = f"{csv_dir}/comparison_{dataset}.tex"
-        df.to_latex(out_tex, index=False)
-        logger.info(f"Tabla LaTeX guardada en {out_tex}")
-
-        # Gráficos de clasificación
-        _plot_classification_metrics(df, dataset, fig_dir)
-
-        return
-
-    # ============================================================
-    # REGRESIÓN (WINE, GASOLINE)
-    # ============================================================
+    # REGRESIÓN
 
     pls_cv_path = f"{csv_dir}/pls_cv_{dataset}.csv"
     classical_path = f"{csv_dir}/classical_results_{dataset}.csv"
@@ -151,32 +115,8 @@ def compare_results(dataset):
     _plot_regression_metrics(comparison, dataset, fig_dir)
 
 
-# ============================================================
-# GRÁFICOS CLASIFICACIÓN
-# ============================================================
 
-def _plot_classification_metrics(df, dataset, fig_dir):
-    metrics = ["accuracy", "f1", "roc_auc"]
-
-    for m in metrics:
-        if m not in df.columns:
-            continue
-
-        plt.figure(figsize=(6, 4))
-        plt.bar(df["model"], df[m], color="steelblue")
-        plt.title(f"{m.upper()} - {dataset}")
-        plt.tight_layout()
-
-        out = f"{fig_dir}/{m}_{dataset}.png"
-        plt.savefig(out)
-        plt.close()
-
-        logger.info(f"Gráfico guardado: {out}")
-
-
-# ============================================================
-# GRÁFICOS REGRESIÓN
-# ============================================================
+# GRÁFICOS REGRESIÓN 
 
 def _plot_regression_metrics(comparison, dataset, fig_dir):
     metrics = ["rmse", "mae", "mdae", "mape", "rmsle", "r2", "adj_r2", "nrmse"]
@@ -203,23 +143,4 @@ def _plot_regression_metrics(comparison, dataset, fig_dir):
         plt.close()
 
         logger.info(f"Gráfico guardado: {out_png}")
-
-
-# ============================================================
-# MAIN
-# ============================================================
-
-def main():
-    safe_create_dir("results")
-
-    datasets = ["wine", "gasoline"]
-
-    for dataset in datasets:
-        try:
-            compare_results(dataset)
-        except Exception as e:
-            logger.error(f"Error comparando {dataset}: {str(e)}")
-
-
-if __name__ == "__main__":
-    main()
+ 
