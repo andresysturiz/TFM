@@ -2,6 +2,7 @@
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.model_selection import KFold
 from sklearn.cross_decomposition import PLSRegression
 
@@ -23,6 +24,38 @@ class PLSExperiment(BaseExperiment):
         self.max_components = max_components
         self.n_splits = n_splits
 
+    def _plot_cv_curve(self, rmse_list, fig_dir):
+        """
+        Genera la curva RMSE-CV vs número de componentes.
+        """
+
+        components = range(1, len(rmse_list) + 1)
+
+        plt.figure(figsize=(8, 5))
+        plt.plot(components, rmse_list, marker="o", linewidth=2)
+
+        best_idx = np.argmin(rmse_list)
+        best_comp = list(components)[best_idx]
+
+        plt.axvline(best_comp, linestyle="--")
+        plt.scatter(best_comp, rmse_list[best_idx], s=80)
+
+        plt.xlabel("Número de componentes")
+        plt.ylabel("RMSE-CV")
+        plt.title(f"PLS Cross-Validation - {self.dataset}")
+
+        plt.xticks(list(components))
+        plt.grid(True, alpha=0.3)
+        plt.tight_layout()
+
+        out_path = f"{fig_dir}/pls_cv_{self.dataset}.png"
+
+        plt.savefig(out_path)
+        plt.close()
+
+        logger.info(f"Gráfico CV guardado en {out_path}")
+
+
     def run(self):
         logger.info(f"Iniciando PLS CV REAL para dataset: {self.dataset}")
 
@@ -30,9 +63,14 @@ class PLSExperiment(BaseExperiment):
         self.prepare_data()
         X = self.X_train
         y = self.y_train
+        
+        dataset_dir = f"results/{self.dataset}"
+        base_dir = f"{dataset_dir}/csv"
+        fig_dir = f"{dataset_dir}/figures"
 
-        base_dir = f"results/{self.dataset}/csv"
+        safe_create_dir(dataset_dir)
         safe_create_dir(base_dir)
+        safe_create_dir(fig_dir)
 
         max_comp = min(self.max_components, X.shape[1])
         rmse_list = []
@@ -71,6 +109,8 @@ class PLSExperiment(BaseExperiment):
 
         out_path = f"{base_dir}/pls_cv_{self.dataset}.csv"
         df_out.to_csv(out_path, index=False)
+
+        self._plot_cv_curve(rmse_list, fig_dir)
 
         logger.info(f"Resultados PLS CV guardados en {out_path}")
 
