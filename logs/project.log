@@ -294,3 +294,308 @@
 2026-05-12 14:46:28,885 - CompareRunner - INFO - Gráfico guardado: results/riboflavin/figures/nrmse_riboflavin.png
 2026-05-12 14:46:28,885 - MainPipeline - INFO - === Dataset riboflavin procesado correctamente ===
 2026-05-12 14:46:28,885 - MainPipeline - INFO - === PIPELINE COMPLETO FINALIZADO ===
+2026-05-14 10:56:32,688 - MainPipeline - INFO - === INICIANDO PIPELINE COMPLETO ===
+2026-05-14 10:56:32,689 - utils - INFO - Directorio creado/verificado: results
+2026-05-14 10:56:32,689 - MainPipeline - INFO - === Descargando dataset: gasoline ===
+2026-05-14 10:56:32,689 - utils - INFO - Directorio creado/verificado: data/raw
+2026-05-14 10:56:32,689 - download - INFO - Descargando tecator desde OpenML...
+2026-05-14 10:56:32,718 - download - INFO - tecator guardado en data/raw/tecator.csv (240 filas, 125 columnas)
+2026-05-14 10:56:32,718 - download - INFO - Descargando gasoline.csv usando R (CRAN)...
+2026-05-14 10:56:38,661 - download - INFO - gasoline.csv descargado correctamente desde R (CRAN).
+2026-05-14 10:56:38,661 - download - INFO - Descargando riboflavin desde OpenML...
+2026-05-14 10:56:39,018 - download - INFO - riboflavin guardado en data/raw/riboflavin.csv (71 filas, 4089 columnas)
+2026-05-14 10:56:39,018 - download - INFO - Descarga completada correctamente.
+2026-05-14 10:56:39,018 - MainPipeline - INFO - === Procesando dataset: gasoline ===
+2026-05-14 10:56:39,022 - utils - INFO - Dataset cargado correctamente: data/raw/gasoline.csv
+2026-05-14 10:56:39,022 - DataLoader - INFO - Gasoline cargado: 60 filas, 402 columnas
+2026-05-14 10:56:39,022 - utils - INFO - Directorio creado/verificado: results/gasoline/eda
+2026-05-14 10:56:39,022 - DatasetAnalyzer - INFO - === Iniciando EDA para dataset: gasoline ===
+2026-05-14 10:56:39,023 - DatasetAnalyzer - INFO - Información estructural guardada en results/gasoline/eda/eda_gasoline_info.csv
+2026-05-14 10:56:39,129 - DatasetAnalyzer - INFO - Resumen estadístico guardado en results/gasoline/eda/eda_gasoline_summary.csv
+2026-05-14 10:56:39,130 - DatasetAnalyzer - INFO - Valores faltantes guardados en results/gasoline/eda/eda_gasoline_missing.csv
+2026-05-14 10:56:39,137 - DatasetAnalyzer - INFO - Correlación con target guardada en results/gasoline/eda/eda_gasoline_target_corr.csv
+2026-05-14 10:56:40,146 - DatasetAnalyzer - INFO - === EDA finalizado para gasoline ===
+2026-05-14 10:56:40,146 - MainPipeline - INFO - Ejecutando PLSExperiment (CV) para gasoline
+2026-05-14 10:56:40,146 - PLSExperiment - INFO - Iniciando PLS CV REAL para dataset: gasoline
+2026-05-14 10:56:40,146 - experiment - INFO - Preparando datos para dataset: gasoline
+2026-05-14 10:56:40,150 - utils - INFO - Dataset cargado correctamente: data/raw/gasoline.csv
+2026-05-14 10:56:40,150 - DataLoader - INFO - Gasoline cargado: 60 filas, 402 columnas
+2026-05-14 10:56:40,150 - Preprocessing - INFO - Preprocesando dataset de regresión
+2026-05-14 10:56:40,151 - experiment - INFO - Dataset de regresión preprocesado correctamente.
+2026-05-14 10:56:40,151 - utils - INFO - Directorio creado/verificado: results/gasoline
+2026-05-14 10:56:40,151 - utils - INFO - Directorio creado/verificado: results/gasoline/csv
+2026-05-14 10:56:40,151 - utils - INFO - Directorio creado/verificado: results/gasoline/figures
+2026-05-14 10:56:40,184 - PLSExperiment - INFO - gasoline | Componentes=1 | RMSE_CV=1.2397
+2026-05-14 10:56:40,329 - PLSExperiment - INFO - gasoline | Componentes=2 | RMSE_CV=0.8366
+2026-05-14 10:56:40,395 - PLSExperiment - INFO - gasoline | Componentes=3 | RMSE_CV=0.2494
+2026-05-14 10:56:40,401 - PLSExperiment - INFO - gasoline | Componentes=4 | RMSE_CV=0.2326
+2026-05-14 10:56:40,455 - PLSExperiment - INFO - gasoline | Componentes=5 | RMSE_CV=0.2152
+2026-05-14 10:56:40,469 - PLSExperiment - INFO - gasoline | Componentes=6 | RMSE_CV=0.2017
+2026-05-14 10:56:40,479 - PLSExperiment - INFO - gasoline | Componentes=7 | RMSE_CV=0.2032
+2026-05-14 10:56:40,496 - PLSExperiment - INFO - gasoline | Componentes=8 | RMSE_CV=0.2016
+2026-05-14 10:56:40,505 - PLSExperiment - INFO - gasoline | Componentes=9 | RMSE_CV=0.2224
+2026-05-14 10:56:40,550 - PLSExperiment - INFO - gasoline | Componentes=10 | RMSE_CV=0.2437
+2026-05-14 10:56:40,563 - PLSExperiment - INFO - gasoline | Componentes=11 | RMSE_CV=0.2534
+2026-05-14 10:56:40,591 - PLSExperiment - INFO - gasoline | Componentes=12 | RMSE_CV=0.2598
+2026-05-14 10:56:40,605 - PLSExperiment - INFO - gasoline | Componentes=13 | RMSE_CV=0.2696
+2026-05-14 10:56:40,743 - PLSExperiment - INFO - gasoline | Componentes=14 | RMSE_CV=0.2781
+2026-05-14 10:56:40,900 - PLSExperiment - INFO - gasoline | Componentes=15 | RMSE_CV=0.2856
+2026-05-14 10:56:40,900 - PLSExperiment - INFO - Mejor número de componentes (CV REAL) para gasoline: 8
+2026-05-14 10:56:40,980 - PLSExperiment - INFO - Gráfico CV guardado en results/gasoline/figures/pls_cv_gasoline.png
+2026-05-14 10:56:40,980 - PLSExperiment - INFO - Resultados PLS CV guardados en results/gasoline/csv/pls_cv_gasoline.csv
+2026-05-14 10:56:40,980 - MainPipeline - INFO - Entrenando PLS FINAL para gasoline
+2026-05-14 10:56:40,980 - PLSFinalExperiment - INFO - Iniciando PLS FINAL para dataset: gasoline
+2026-05-14 10:56:40,980 - experiment - INFO - Preparando datos para dataset: gasoline
+2026-05-14 10:56:40,983 - utils - INFO - Dataset cargado correctamente: data/raw/gasoline.csv
+2026-05-14 10:56:40,983 - DataLoader - INFO - Gasoline cargado: 60 filas, 402 columnas
+2026-05-14 10:56:40,983 - Preprocessing - INFO - Preprocesando dataset de regresión
+2026-05-14 10:56:40,984 - experiment - INFO - Dataset de regresión preprocesado correctamente.
+2026-05-14 10:56:40,985 - PLSFinalExperiment - INFO - Mejor número de componentes detectado: 8
+2026-05-14 10:56:41,083 - utils - INFO - Directorio creado/verificado: results/gasoline/csv
+2026-05-14 10:56:41,084 - PLSFinalExperiment - INFO - Resultados PLS FINAL guardados en results/gasoline/csv/pls_final_results_gasoline.csv
+2026-05-14 10:56:41,084 - MainPipeline - INFO - Ejecutando ClassicalExperiment para gasoline
+2026-05-14 10:56:41,084 - ClassicalExperiment - INFO - Iniciando métodos clásicos para dataset: gasoline
+2026-05-14 10:56:41,084 - experiment - INFO - Preparando datos para dataset: gasoline
+2026-05-14 10:56:41,087 - utils - INFO - Dataset cargado correctamente: data/raw/gasoline.csv
+2026-05-14 10:56:41,087 - DataLoader - INFO - Gasoline cargado: 60 filas, 402 columnas
+2026-05-14 10:56:41,087 - Preprocessing - INFO - Preprocesando dataset de regresión
+2026-05-14 10:56:41,088 - experiment - INFO - Dataset de regresión preprocesado correctamente.
+2026-05-14 10:56:41,088 - utils - INFO - Directorio creado/verificado: results/gasoline/csv
+2026-05-14 10:56:41,088 - OLSModel - INFO - Inicializando modelo OLS
+2026-05-14 10:56:41,088 - RidgeModel - INFO - Inicializando Ridge con alpha=1.0
+2026-05-14 10:56:41,088 - LassoModel - INFO - Inicializando Lasso con alpha=0.01
+2026-05-14 10:56:41,092 - OLSModel - INFO - OLS ajustado correctamente
+2026-05-14 10:56:41,093 - ClassicalExperiment - INFO - gasoline | OLS | {'mse': 0.1191463875458368, 'rmse': 0.3451758791483507, 'mae': 0.2516170755543416, 'mdae': 0.1669511556074994, 'mape': 0.28788235821355834, 'rmsle': 0.0038806181921219717, 'r2': 0.9395382494239105, 'adj_r2': 0.9334920743663015, 'nrmse': 0.08965607250606492, 'train_time': 0.0004918575286865234, 'model': 'OLS'}
+2026-05-14 10:56:41,103 - RidgeModel - INFO - Ridge ajustado correctamente
+2026-05-14 10:56:41,103 - ClassicalExperiment - INFO - gasoline | Ridge | {'mse': 0.10702506530163038, 'rmse': 0.32714685586389236, 'mae': 0.23489452415598797, 'mdae': 0.18632155141005313, 'mape': 0.2685564200192389, 'rmsle': 0.003677920833795001, 'r2': 0.9456893076076903, 'adj_r2': 0.9402582383684593, 'nrmse': 0.08497320931529653, 'train_time': 0.0005080699920654297, 'model': 'Ridge'}
+2026-05-14 10:56:41,110 - LassoModel - INFO - Lasso ajustado correctamente
+2026-05-14 10:56:41,111 - ClassicalExperiment - INFO - gasoline | Lasso | {'mse': 0.0652213517875519, 'rmse': 0.25538471330044776, 'mae': 0.19230507430172258, 'mdae': 0.15043871311975465, 'mape': 0.22058504242233024, 'rmsle': 0.002880354855024501, 'r2': 0.9669029234940314, 'adj_r2': 0.9635932158434345, 'nrmse': 0.06633369176634993, 'train_time': 0.00045680999755859375, 'model': 'Lasso'}
+2026-05-14 10:56:41,111 - PCRModel - INFO - Seleccionando número óptimo de componentes para PCR...
+2026-05-14 10:56:41,151 - PCRModel - INFO - Mejor número de componentes para PCR: 7
+2026-05-14 10:56:41,152 - PCRModel - INFO - Entrenando PCR con 7 componentes
+2026-05-14 10:56:41,152 - PCRModel - INFO - PCR ajustado correctamente
+2026-05-14 10:56:41,153 - ClassicalExperiment - INFO - gasoline | PCR | {'mse': 0.08701298191666919, 'rmse': 0.2949796296639298, 'mae': 0.2380084190717978, 'mdae': 0.1900105648362569, 'mape': 0.27331559791500976, 'rmsle': 0.00333104775952874, 'r2': 0.9558445932109902, 'adj_r2': 0.9514290525320893, 'nrmse': 0.07661808562699458, 'train_time': 0.0004010200500488281, 'model': 'PCR'}
+2026-05-14 10:56:41,154 - ClassicalExperiment - INFO - Resultados clásicos guardados en results/gasoline/csv/classical_results_gasoline.csv
+2026-05-14 10:56:41,154 - MainPipeline - INFO - Comparando resultados para gasoline
+2026-05-14 10:56:41,154 - CompareRunner - INFO - Comparando resultados para dataset: gasoline
+2026-05-14 10:56:41,154 - utils - INFO - Directorio creado/verificado: results/gasoline
+2026-05-14 10:56:41,154 - utils - INFO - Directorio creado/verificado: results/gasoline/csv
+2026-05-14 10:56:41,154 - utils - INFO - Directorio creado/verificado: results/gasoline/figures
+2026-05-14 10:56:41,154 - CompareRunner - INFO - Resultados cargados: results/gasoline/csv/pls_cv_gasoline.csv
+2026-05-14 10:56:41,155 - CompareRunner - INFO - Resultados cargados: results/gasoline/csv/classical_results_gasoline.csv
+2026-05-14 10:56:41,156 - CompareRunner - INFO - PLS FINAL incluido en comparación: results/gasoline/csv/pls_final_results_gasoline.csv
+2026-05-14 10:56:41,156 - CompareRunner - INFO - Modelo PLS_CV_8_components seleccionó 8 componentes
+2026-05-14 10:56:41,157 - CompareRunner - INFO - Modelo PLS_FINAL_8_components seleccionó 8 componentes
+2026-05-14 10:56:41,157 - CompareRunner - INFO - Tabla comparativa guardada en results/gasoline/csv/comparison_gasoline.csv
+2026-05-14 10:56:41,444 - CompareRunner - INFO - Tabla LaTeX guardada en results/gasoline/csv/comparison_gasoline.tex
+2026-05-14 10:56:41,483 - CompareRunner - INFO - Gráfico guardado: results/gasoline/figures/rmse_gasoline.png
+2026-05-14 10:56:41,519 - CompareRunner - INFO - Gráfico guardado: results/gasoline/figures/mae_gasoline.png
+2026-05-14 10:56:41,553 - CompareRunner - INFO - Gráfico guardado: results/gasoline/figures/mdae_gasoline.png
+2026-05-14 10:56:41,589 - CompareRunner - INFO - Gráfico guardado: results/gasoline/figures/mape_gasoline.png
+2026-05-14 10:56:41,629 - CompareRunner - INFO - Gráfico guardado: results/gasoline/figures/rmsle_gasoline.png
+2026-05-14 10:56:41,668 - CompareRunner - INFO - Gráfico guardado: results/gasoline/figures/r2_gasoline.png
+2026-05-14 10:56:41,703 - CompareRunner - INFO - Gráfico guardado: results/gasoline/figures/adj_r2_gasoline.png
+2026-05-14 10:56:41,742 - CompareRunner - INFO - Gráfico guardado: results/gasoline/figures/nrmse_gasoline.png
+2026-05-14 10:56:41,742 - MainPipeline - INFO - === Dataset gasoline procesado correctamente ===
+2026-05-14 10:56:41,742 - MainPipeline - INFO - === Descargando dataset: tecator ===
+2026-05-14 10:56:41,742 - utils - INFO - Directorio creado/verificado: data/raw
+2026-05-14 10:56:41,742 - download - INFO - Descargando tecator desde OpenML...
+2026-05-14 10:56:41,759 - download - INFO - tecator guardado en data/raw/tecator.csv (240 filas, 125 columnas)
+2026-05-14 10:56:41,759 - download - INFO - Descargando gasoline.csv usando R (CRAN)...
+2026-05-14 10:56:46,359 - download - INFO - gasoline.csv descargado correctamente desde R (CRAN).
+2026-05-14 10:56:46,359 - download - INFO - Descargando riboflavin desde OpenML...
+2026-05-14 10:56:46,705 - download - INFO - riboflavin guardado en data/raw/riboflavin.csv (71 filas, 4089 columnas)
+2026-05-14 10:56:46,705 - download - INFO - Descarga completada correctamente.
+2026-05-14 10:56:46,705 - MainPipeline - INFO - === Procesando dataset: tecator ===
+2026-05-14 10:56:46,707 - utils - INFO - Dataset cargado correctamente: data/raw/tecator.csv
+2026-05-14 10:56:46,708 - DataLoader - INFO - Tecator cargado: 240 filas, 125 columnas
+2026-05-14 10:56:46,708 - utils - INFO - Directorio creado/verificado: results/tecator/eda
+2026-05-14 10:56:46,708 - DatasetAnalyzer - INFO - === Iniciando EDA para dataset: tecator ===
+2026-05-14 10:56:46,708 - DatasetAnalyzer - INFO - Información estructural guardada en results/tecator/eda/eda_tecator_info.csv
+2026-05-14 10:56:46,744 - DatasetAnalyzer - INFO - Resumen estadístico guardado en results/tecator/eda/eda_tecator_summary.csv
+2026-05-14 10:56:46,745 - DatasetAnalyzer - INFO - Valores faltantes guardados en results/tecator/eda/eda_tecator_missing.csv
+2026-05-14 10:56:46,749 - DatasetAnalyzer - INFO - Correlación con target guardada en results/tecator/eda/eda_tecator_target_corr.csv
+2026-05-14 10:56:46,964 - DatasetAnalyzer - INFO - === EDA finalizado para tecator ===
+2026-05-14 10:56:46,964 - MainPipeline - INFO - Ejecutando PLSExperiment (CV) para tecator
+2026-05-14 10:56:46,964 - PLSExperiment - INFO - Iniciando PLS CV REAL para dataset: tecator
+2026-05-14 10:56:46,964 - experiment - INFO - Preparando datos para dataset: tecator
+2026-05-14 10:56:46,967 - utils - INFO - Dataset cargado correctamente: data/raw/tecator.csv
+2026-05-14 10:56:46,967 - DataLoader - INFO - Tecator cargado: 240 filas, 125 columnas
+2026-05-14 10:56:46,967 - Preprocessing - INFO - Preprocesando dataset de regresión
+2026-05-14 10:56:46,968 - experiment - INFO - Dataset de regresión preprocesado correctamente.
+2026-05-14 10:56:46,968 - utils - INFO - Directorio creado/verificado: results/tecator
+2026-05-14 10:56:46,968 - utils - INFO - Directorio creado/verificado: results/tecator/csv
+2026-05-14 10:56:46,968 - utils - INFO - Directorio creado/verificado: results/tecator/figures
+2026-05-14 10:56:47,001 - PLSExperiment - INFO - tecator | Componentes=1 | RMSE_CV=12.7346
+2026-05-14 10:56:47,020 - PLSExperiment - INFO - tecator | Componentes=2 | RMSE_CV=7.5273
+2026-05-14 10:56:47,037 - PLSExperiment - INFO - tecator | Componentes=3 | RMSE_CV=5.8820
+2026-05-14 10:56:47,075 - PLSExperiment - INFO - tecator | Componentes=4 | RMSE_CV=4.6545
+2026-05-14 10:56:47,140 - PLSExperiment - INFO - tecator | Componentes=5 | RMSE_CV=3.5429
+2026-05-14 10:56:47,210 - PLSExperiment - INFO - tecator | Componentes=6 | RMSE_CV=3.4949
+2026-05-14 10:56:47,241 - PLSExperiment - INFO - tecator | Componentes=7 | RMSE_CV=3.3710
+2026-05-14 10:56:47,265 - PLSExperiment - INFO - tecator | Componentes=8 | RMSE_CV=3.0792
+2026-05-14 10:56:47,281 - PLSExperiment - INFO - tecator | Componentes=9 | RMSE_CV=3.0594
+2026-05-14 10:56:47,300 - PLSExperiment - INFO - tecator | Componentes=10 | RMSE_CV=3.0131
+2026-05-14 10:56:47,383 - PLSExperiment - INFO - tecator | Componentes=11 | RMSE_CV=3.0437
+2026-05-14 10:56:47,437 - PLSExperiment - INFO - tecator | Componentes=12 | RMSE_CV=2.9886
+2026-05-14 10:56:47,445 - PLSExperiment - INFO - tecator | Componentes=13 | RMSE_CV=2.8365
+2026-05-14 10:56:47,465 - PLSExperiment - INFO - tecator | Componentes=14 | RMSE_CV=2.8549
+2026-05-14 10:56:47,481 - PLSExperiment - INFO - tecator | Componentes=15 | RMSE_CV=2.9622
+2026-05-14 10:56:47,481 - PLSExperiment - INFO - Mejor número de componentes (CV REAL) para tecator: 13
+2026-05-14 10:56:47,527 - PLSExperiment - INFO - Gráfico CV guardado en results/tecator/figures/pls_cv_tecator.png
+2026-05-14 10:56:47,527 - PLSExperiment - INFO - Resultados PLS CV guardados en results/tecator/csv/pls_cv_tecator.csv
+2026-05-14 10:56:47,527 - MainPipeline - INFO - Entrenando PLS FINAL para tecator
+2026-05-14 10:56:47,527 - PLSFinalExperiment - INFO - Iniciando PLS FINAL para dataset: tecator
+2026-05-14 10:56:47,527 - experiment - INFO - Preparando datos para dataset: tecator
+2026-05-14 10:56:47,529 - utils - INFO - Dataset cargado correctamente: data/raw/tecator.csv
+2026-05-14 10:56:47,529 - DataLoader - INFO - Tecator cargado: 240 filas, 125 columnas
+2026-05-14 10:56:47,529 - Preprocessing - INFO - Preprocesando dataset de regresión
+2026-05-14 10:56:47,530 - experiment - INFO - Dataset de regresión preprocesado correctamente.
+2026-05-14 10:56:47,530 - PLSFinalExperiment - INFO - Mejor número de componentes detectado: 13
+2026-05-14 10:56:47,532 - utils - INFO - Directorio creado/verificado: results/tecator/csv
+2026-05-14 10:56:47,532 - PLSFinalExperiment - INFO - Resultados PLS FINAL guardados en results/tecator/csv/pls_final_results_tecator.csv
+2026-05-14 10:56:47,532 - MainPipeline - INFO - Ejecutando ClassicalExperiment para tecator
+2026-05-14 10:56:47,532 - ClassicalExperiment - INFO - Iniciando métodos clásicos para dataset: tecator
+2026-05-14 10:56:47,532 - experiment - INFO - Preparando datos para dataset: tecator
+2026-05-14 10:56:47,534 - utils - INFO - Dataset cargado correctamente: data/raw/tecator.csv
+2026-05-14 10:56:47,534 - DataLoader - INFO - Tecator cargado: 240 filas, 125 columnas
+2026-05-14 10:56:47,534 - Preprocessing - INFO - Preprocesando dataset de regresión
+2026-05-14 10:56:47,535 - experiment - INFO - Dataset de regresión preprocesado correctamente.
+2026-05-14 10:56:47,535 - utils - INFO - Directorio creado/verificado: results/tecator/csv
+2026-05-14 10:56:47,535 - OLSModel - INFO - Inicializando modelo OLS
+2026-05-14 10:56:47,535 - RidgeModel - INFO - Inicializando Ridge con alpha=1.0
+2026-05-14 10:56:47,535 - LassoModel - INFO - Inicializando Lasso con alpha=0.01
+2026-05-14 10:56:47,536 - OLSModel - INFO - OLS ajustado correctamente
+2026-05-14 10:56:47,537 - ClassicalExperiment - INFO - tecator | OLS | {'mse': 4.820670359314316, 'rmse': 2.1956025048524417, 'mae': 1.527658087317791, 'mdae': 0.8522739092477996, 'mape': 11.989654478910449, 'rmsle': 0.14307618216848306, 'r2': 0.9774423078306199, 'adj_r2': 0.9769519232182421, 'nrmse': 0.03927732566820111, 'train_time': 0.0004189014434814453, 'model': 'OLS'}
+2026-05-14 10:56:47,537 - RidgeModel - INFO - Ridge ajustado correctamente
+2026-05-14 10:56:47,538 - ClassicalExperiment - INFO - tecator | Ridge | {'mse': 14.110158314819913, 'rmse': 3.756349067222043, 'mae': 3.2326665053522396, 'mdae': 2.9800350394081896, 'mape': 35.12144624007777, 'rmsle': 0.3219982941097097, 'r2': 0.9339733721655674, 'adj_r2': 0.9325380106909058, 'nrmse': 0.06719765773205802, 'train_time': 0.0003921985626220703, 'model': 'Ridge'}
+2026-05-14 10:56:47,567 - LassoModel - INFO - Lasso ajustado correctamente
+2026-05-14 10:56:47,568 - ClassicalExperiment - INFO - tecator | Lasso | {'mse': 13.459687763897394, 'rmse': 3.6687447122820354, 'mae': 3.0458727353999087, 'mdae': 2.689262305569963, 'mape': 30.03257666111609, 'rmsle': 0.2825101874039517, 'r2': 0.9370171634558402, 'adj_r2': 0.9356479713570541, 'nrmse': 0.0656304957474425, 'train_time': 0.0004911422729492188, 'model': 'Lasso'}
+2026-05-14 10:56:47,568 - PCRModel - INFO - Seleccionando número óptimo de componentes para PCR...
+2026-05-14 10:56:47,621 - PCRModel - INFO - Mejor número de componentes para PCR: 15
+2026-05-14 10:56:47,621 - PCRModel - INFO - Entrenando PCR con 15 componentes
+2026-05-14 10:56:47,622 - PCRModel - INFO - PCR ajustado correctamente
+2026-05-14 10:56:47,623 - ClassicalExperiment - INFO - tecator | PCR | {'mse': 8.403231613015747, 'rmse': 2.898832801838655, 'mae': 2.16050412803434, 'mdae': 1.7643411705370844, 'mape': 19.288252668242187, 'rmsle': 0.19505433136771558, 'r2': 0.9606781841890191, 'adj_r2': 0.9598233621061717, 'nrmse': 0.05185747409371476, 'train_time': 0.0004019737243652344, 'model': 'PCR'}
+2026-05-14 10:56:47,623 - ClassicalExperiment - INFO - Resultados clásicos guardados en results/tecator/csv/classical_results_tecator.csv
+2026-05-14 10:56:47,623 - MainPipeline - INFO - Comparando resultados para tecator
+2026-05-14 10:56:47,623 - CompareRunner - INFO - Comparando resultados para dataset: tecator
+2026-05-14 10:56:47,623 - utils - INFO - Directorio creado/verificado: results/tecator
+2026-05-14 10:56:47,623 - utils - INFO - Directorio creado/verificado: results/tecator/csv
+2026-05-14 10:56:47,624 - utils - INFO - Directorio creado/verificado: results/tecator/figures
+2026-05-14 10:56:47,624 - CompareRunner - INFO - Resultados cargados: results/tecator/csv/pls_cv_tecator.csv
+2026-05-14 10:56:47,624 - CompareRunner - INFO - Resultados cargados: results/tecator/csv/classical_results_tecator.csv
+2026-05-14 10:56:47,626 - CompareRunner - INFO - PLS FINAL incluido en comparación: results/tecator/csv/pls_final_results_tecator.csv
+2026-05-14 10:56:47,626 - CompareRunner - INFO - Modelo PLS_FINAL_13_components seleccionó 13 componentes
+2026-05-14 10:56:47,626 - CompareRunner - INFO - Modelo PLS_CV_13_components seleccionó 13 componentes
+2026-05-14 10:56:47,626 - CompareRunner - INFO - Tabla comparativa guardada en results/tecator/csv/comparison_tecator.csv
+2026-05-14 10:56:47,628 - CompareRunner - INFO - Tabla LaTeX guardada en results/tecator/csv/comparison_tecator.tex
+2026-05-14 10:56:47,669 - CompareRunner - INFO - Gráfico guardado: results/tecator/figures/rmse_tecator.png
+2026-05-14 10:56:47,705 - CompareRunner - INFO - Gráfico guardado: results/tecator/figures/mae_tecator.png
+2026-05-14 10:56:47,740 - CompareRunner - INFO - Gráfico guardado: results/tecator/figures/mdae_tecator.png
+2026-05-14 10:56:47,775 - CompareRunner - INFO - Gráfico guardado: results/tecator/figures/mape_tecator.png
+2026-05-14 10:56:47,810 - CompareRunner - INFO - Gráfico guardado: results/tecator/figures/rmsle_tecator.png
+2026-05-14 10:56:47,844 - CompareRunner - INFO - Gráfico guardado: results/tecator/figures/r2_tecator.png
+2026-05-14 10:56:47,885 - CompareRunner - INFO - Gráfico guardado: results/tecator/figures/adj_r2_tecator.png
+2026-05-14 10:56:47,929 - CompareRunner - INFO - Gráfico guardado: results/tecator/figures/nrmse_tecator.png
+2026-05-14 10:56:47,929 - MainPipeline - INFO - === Dataset tecator procesado correctamente ===
+2026-05-14 10:56:47,930 - MainPipeline - INFO - === Descargando dataset: riboflavin ===
+2026-05-14 10:56:47,930 - utils - INFO - Directorio creado/verificado: data/raw
+2026-05-14 10:56:47,930 - download - INFO - Descargando tecator desde OpenML...
+2026-05-14 10:56:47,945 - download - INFO - tecator guardado en data/raw/tecator.csv (240 filas, 125 columnas)
+2026-05-14 10:56:47,945 - download - INFO - Descargando gasoline.csv usando R (CRAN)...
+2026-05-14 10:56:52,816 - download - INFO - gasoline.csv descargado correctamente desde R (CRAN).
+2026-05-14 10:56:52,816 - download - INFO - Descargando riboflavin desde OpenML...
+2026-05-14 10:56:53,136 - download - INFO - riboflavin guardado en data/raw/riboflavin.csv (71 filas, 4089 columnas)
+2026-05-14 10:56:53,136 - download - INFO - Descarga completada correctamente.
+2026-05-14 10:56:53,136 - MainPipeline - INFO - === Procesando dataset: riboflavin ===
+2026-05-14 10:56:53,170 - utils - INFO - Dataset cargado correctamente: data/raw/riboflavin.csv
+2026-05-14 10:56:53,171 - DataLoader - INFO - Riboflavin cargado: 71 filas, 4089 columnas
+2026-05-14 10:56:53,171 - utils - INFO - Directorio creado/verificado: results/riboflavin/eda
+2026-05-14 10:56:53,171 - DatasetAnalyzer - INFO - === Iniciando EDA para dataset: riboflavin ===
+2026-05-14 10:56:53,171 - DatasetAnalyzer - INFO - Información estructural guardada en results/riboflavin/eda/eda_riboflavin_info.csv
+2026-05-14 10:56:54,361 - DatasetAnalyzer - INFO - Resumen estadístico guardado en results/riboflavin/eda/eda_riboflavin_summary.csv
+2026-05-14 10:56:54,363 - DatasetAnalyzer - INFO - Valores faltantes guardados en results/riboflavin/eda/eda_riboflavin_missing.csv
+2026-05-14 10:56:55,158 - DatasetAnalyzer - INFO - Correlación con target guardada en results/riboflavin/eda/eda_riboflavin_target_corr.csv
+2026-05-14 10:56:55,230 - DatasetAnalyzer - INFO - === EDA finalizado para riboflavin ===
+2026-05-14 10:56:55,230 - MainPipeline - INFO - Ejecutando PLSExperiment (CV) para riboflavin
+2026-05-14 10:56:55,230 - PLSExperiment - INFO - Iniciando PLS CV REAL para dataset: riboflavin
+2026-05-14 10:56:55,230 - experiment - INFO - Preparando datos para dataset: riboflavin
+2026-05-14 10:56:55,262 - utils - INFO - Dataset cargado correctamente: data/raw/riboflavin.csv
+2026-05-14 10:56:55,263 - DataLoader - INFO - Riboflavin cargado: 71 filas, 4089 columnas
+2026-05-14 10:56:55,263 - Preprocessing - INFO - Preprocesando dataset de regresión
+2026-05-14 10:56:55,265 - experiment - INFO - Dataset de regresión preprocesado correctamente.
+2026-05-14 10:56:55,265 - utils - INFO - Directorio creado/verificado: results/riboflavin
+2026-05-14 10:56:55,265 - utils - INFO - Directorio creado/verificado: results/riboflavin/csv
+2026-05-14 10:56:55,265 - utils - INFO - Directorio creado/verificado: results/riboflavin/figures
+2026-05-14 10:56:55,272 - PLSExperiment - INFO - riboflavin | Componentes=1 | RMSE_CV=0.9272
+2026-05-14 10:56:55,288 - PLSExperiment - INFO - riboflavin | Componentes=2 | RMSE_CV=0.6583
+2026-05-14 10:56:55,347 - PLSExperiment - INFO - riboflavin | Componentes=3 | RMSE_CV=0.6044
+2026-05-14 10:56:55,378 - PLSExperiment - INFO - riboflavin | Componentes=4 | RMSE_CV=0.5760
+2026-05-14 10:56:55,395 - PLSExperiment - INFO - riboflavin | Componentes=5 | RMSE_CV=0.5562
+2026-05-14 10:56:55,428 - PLSExperiment - INFO - riboflavin | Componentes=6 | RMSE_CV=0.5757
+2026-05-14 10:56:55,454 - PLSExperiment - INFO - riboflavin | Componentes=7 | RMSE_CV=0.5891
+2026-05-14 10:56:55,488 - PLSExperiment - INFO - riboflavin | Componentes=8 | RMSE_CV=0.5844
+2026-05-14 10:56:55,528 - PLSExperiment - INFO - riboflavin | Componentes=9 | RMSE_CV=0.5830
+2026-05-14 10:56:55,562 - PLSExperiment - INFO - riboflavin | Componentes=10 | RMSE_CV=0.5801
+2026-05-14 10:56:55,599 - PLSExperiment - INFO - riboflavin | Componentes=11 | RMSE_CV=0.5777
+2026-05-14 10:56:55,644 - PLSExperiment - INFO - riboflavin | Componentes=12 | RMSE_CV=0.5781
+2026-05-14 10:56:55,704 - PLSExperiment - INFO - riboflavin | Componentes=13 | RMSE_CV=0.5785
+2026-05-14 10:56:55,871 - PLSExperiment - INFO - riboflavin | Componentes=14 | RMSE_CV=0.5795
+2026-05-14 10:56:55,958 - PLSExperiment - INFO - riboflavin | Componentes=15 | RMSE_CV=0.5796
+2026-05-14 10:56:55,958 - PLSExperiment - INFO - Mejor número de componentes (CV REAL) para riboflavin: 5
+2026-05-14 10:56:56,007 - PLSExperiment - INFO - Gráfico CV guardado en results/riboflavin/figures/pls_cv_riboflavin.png
+2026-05-14 10:56:56,007 - PLSExperiment - INFO - Resultados PLS CV guardados en results/riboflavin/csv/pls_cv_riboflavin.csv
+2026-05-14 10:56:56,007 - MainPipeline - INFO - Entrenando PLS FINAL para riboflavin
+2026-05-14 10:56:56,007 - PLSFinalExperiment - INFO - Iniciando PLS FINAL para dataset: riboflavin
+2026-05-14 10:56:56,007 - experiment - INFO - Preparando datos para dataset: riboflavin
+2026-05-14 10:56:56,039 - utils - INFO - Dataset cargado correctamente: data/raw/riboflavin.csv
+2026-05-14 10:56:56,040 - DataLoader - INFO - Riboflavin cargado: 71 filas, 4089 columnas
+2026-05-14 10:56:56,040 - Preprocessing - INFO - Preprocesando dataset de regresión
+2026-05-14 10:56:56,041 - experiment - INFO - Dataset de regresión preprocesado correctamente.
+2026-05-14 10:56:56,042 - PLSFinalExperiment - INFO - Mejor número de componentes detectado: 5
+2026-05-14 10:56:56,054 - utils - INFO - Directorio creado/verificado: results/riboflavin/csv
+2026-05-14 10:56:56,055 - PLSFinalExperiment - INFO - Resultados PLS FINAL guardados en results/riboflavin/csv/pls_final_results_riboflavin.csv
+2026-05-14 10:56:56,055 - MainPipeline - INFO - Ejecutando ClassicalExperiment para riboflavin
+2026-05-14 10:56:56,055 - ClassicalExperiment - INFO - Iniciando métodos clásicos para dataset: riboflavin
+2026-05-14 10:56:56,055 - experiment - INFO - Preparando datos para dataset: riboflavin
+2026-05-14 10:56:56,086 - utils - INFO - Dataset cargado correctamente: data/raw/riboflavin.csv
+2026-05-14 10:56:56,087 - DataLoader - INFO - Riboflavin cargado: 71 filas, 4089 columnas
+2026-05-14 10:56:56,087 - Preprocessing - INFO - Preprocesando dataset de regresión
+2026-05-14 10:56:56,088 - experiment - INFO - Dataset de regresión preprocesado correctamente.
+2026-05-14 10:56:56,088 - utils - INFO - Directorio creado/verificado: results/riboflavin/csv
+2026-05-14 10:56:56,088 - OLSModel - INFO - Inicializando modelo OLS
+2026-05-14 10:56:56,089 - RidgeModel - INFO - Inicializando Ridge con alpha=1.0
+2026-05-14 10:56:56,089 - LassoModel - INFO - Inicializando Lasso con alpha=0.01
+2026-05-14 10:56:56,094 - OLSModel - INFO - OLS ajustado correctamente
+2026-05-14 10:56:56,095 - ClassicalExperiment - INFO - riboflavin | OLS | {'mse': 0.12812913593070357, 'rmse': 0.3579513038538952, 'mae': 0.2798204635465298, 'mdae': 0.31293607842123716, 'mape': 3.9780962467567287, 'rmsle': None, 'r2': 0.7786072125244466, 'adj_r2': 0.7615769981032503, 'nrmse': 0.12282708478653706, 'train_time': 0.0004191398620605469, 'model': 'OLS'}
+2026-05-14 10:56:56,096 - RidgeModel - INFO - Ridge ajustado correctamente
+2026-05-14 10:56:56,097 - ClassicalExperiment - INFO - riboflavin | Ridge | {'mse': 0.12786559187253416, 'rmse': 0.3575829859942083, 'mae': 0.2796009745657316, 'mdae': 0.3124723552934583, 'mape': 3.9748603917340857, 'rmsle': None, 'r2': 0.779062587121621, 'adj_r2': 0.7620674015155919, 'nrmse': 0.12270070053121214, 'train_time': 0.0003509521484375, 'model': 'Ridge'}
+2026-05-14 10:56:56,131 - LassoModel - INFO - Lasso ajustado correctamente
+2026-05-14 10:56:56,131 - ClassicalExperiment - INFO - riboflavin | Lasso | {'mse': 0.19603929529472955, 'rmse': 0.4427632497110951, 'mae': 0.39043681399206437, 'mdae': 0.394878158695529, 'mape': 5.558329190574883, 'rmsle': None, 'r2': 0.661266067824602, 'adj_r2': 0.6352096115034175, 'nrmse': 0.15192937873701662, 'train_time': 0.0004150867462158203, 'model': 'Lasso'}
+2026-05-14 10:56:56,131 - PCRModel - INFO - Seleccionando número óptimo de componentes para PCR...
+2026-05-14 10:56:56,654 - PCRModel - INFO - Mejor número de componentes para PCR: 9
+2026-05-14 10:56:56,654 - PCRModel - INFO - Entrenando PCR con 9 componentes
+2026-05-14 10:56:56,675 - PCRModel - INFO - PCR ajustado correctamente
+2026-05-14 10:56:56,677 - ClassicalExperiment - INFO - riboflavin | PCR | {'mse': 0.35002117748106065, 'rmse': 0.5916258762774501, 'mae': 0.4828048528244631, 'mdae': 0.4762649118621294, 'mape': 7.140476785839947, 'rmsle': None, 'r2': 0.3952026321326503, 'adj_r2': 0.34867975768131565, 'nrmse': 0.2030099650009946, 'train_time': 0.0008046627044677734, 'model': 'PCR'}
+2026-05-14 10:56:56,678 - ClassicalExperiment - INFO - Resultados clásicos guardados en results/riboflavin/csv/classical_results_riboflavin.csv
+2026-05-14 10:56:56,678 - MainPipeline - INFO - Comparando resultados para riboflavin
+2026-05-14 10:56:56,678 - CompareRunner - INFO - Comparando resultados para dataset: riboflavin
+2026-05-14 10:56:56,678 - utils - INFO - Directorio creado/verificado: results/riboflavin
+2026-05-14 10:56:56,678 - utils - INFO - Directorio creado/verificado: results/riboflavin/csv
+2026-05-14 10:56:56,678 - utils - INFO - Directorio creado/verificado: results/riboflavin/figures
+2026-05-14 10:56:56,679 - CompareRunner - INFO - Resultados cargados: results/riboflavin/csv/pls_cv_riboflavin.csv
+2026-05-14 10:56:56,679 - CompareRunner - INFO - Resultados cargados: results/riboflavin/csv/classical_results_riboflavin.csv
+2026-05-14 10:56:56,681 - CompareRunner - INFO - PLS FINAL incluido en comparación: results/riboflavin/csv/pls_final_results_riboflavin.csv
+2026-05-14 10:56:56,681 - CompareRunner - INFO - Modelo PLS_FINAL_5_components seleccionó 5 componentes
+2026-05-14 10:56:56,681 - CompareRunner - INFO - Modelo PLS_CV_5_components seleccionó 5 componentes
+2026-05-14 10:56:56,681 - CompareRunner - INFO - Tabla comparativa guardada en results/riboflavin/csv/comparison_riboflavin.csv
+2026-05-14 10:56:56,683 - CompareRunner - INFO - Tabla LaTeX guardada en results/riboflavin/csv/comparison_riboflavin.tex
+2026-05-14 10:56:56,737 - CompareRunner - INFO - Gráfico guardado: results/riboflavin/figures/rmse_riboflavin.png
+2026-05-14 10:56:56,784 - CompareRunner - INFO - Gráfico guardado: results/riboflavin/figures/mae_riboflavin.png
+2026-05-14 10:56:56,827 - CompareRunner - INFO - Gráfico guardado: results/riboflavin/figures/mdae_riboflavin.png
+2026-05-14 10:56:56,865 - CompareRunner - INFO - Gráfico guardado: results/riboflavin/figures/mape_riboflavin.png
+2026-05-14 10:56:56,915 - CompareRunner - INFO - Gráfico guardado: results/riboflavin/figures/r2_riboflavin.png
+2026-05-14 10:56:56,956 - CompareRunner - INFO - Gráfico guardado: results/riboflavin/figures/adj_r2_riboflavin.png
+2026-05-14 10:56:56,998 - CompareRunner - INFO - Gráfico guardado: results/riboflavin/figures/nrmse_riboflavin.png
+2026-05-14 10:56:56,998 - MainPipeline - INFO - === Dataset riboflavin procesado correctamente ===
+2026-05-14 10:56:56,998 - MainPipeline - INFO - === PIPELINE COMPLETO FINALIZADO ===

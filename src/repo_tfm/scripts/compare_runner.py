@@ -34,9 +34,8 @@ def load_results(path):
 def compare_results(dataset):
     logger.info(f"Comparando resultados para dataset: {dataset}")
 
-    # -------------------------
     # DIRECTORIOS POR DATASET
-    # -------------------------
+    
     dataset_dir = f"results/{dataset}"
     csv_dir = f"{dataset_dir}/csv"
     fig_dir = f"{dataset_dir}/figures"
