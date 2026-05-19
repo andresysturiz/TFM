@@ -47,37 +47,10 @@ def compare_results(dataset):
 
     # REGRESIÓN
 
-    pls_cv_path = f"{csv_dir}/pls_cv_{dataset}.csv"
     classical_path = f"{csv_dir}/classical_results_{dataset}.csv"
     pls_final_path = f"{csv_dir}/pls_final_results_{dataset}.csv"
 
-    pls_df = load_results(pls_cv_path)
-    classical_df = load_results(classical_path)
-
-    # Mejor RMSE del PLS CV
-    best_pls_rmse = pls_df["rmse_cv"].min()
-    best_pls_components = pls_df.loc[pls_df["rmse_cv"].idxmin(), "n_components"]
-
-    pls_cv_row = {
-        "model": f"PLS_CV_{int(best_pls_components)}_components",
-        "mse": None,
-        "rmse": best_pls_rmse,
-        "mae": None,
-        "mdae": None,
-        "mape": None,
-        "rmsle": None,
-        "r2": None,
-        "adj_r2": None,
-        "nrmse": None,
-        "train_time": None,
-        "best_components": best_pls_components
-    }
-
-    # Combinar resultados
-    comparison = pd.concat([
-        classical_df,
-        pd.DataFrame([pls_cv_row])
-    ], ignore_index=True)
+    comparison = load_results(classical_path)
 
     # Añadir PLS FINAL si existe
     if os.path.exists(pls_final_path):
