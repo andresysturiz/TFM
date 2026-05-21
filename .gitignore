@@ -21,14 +21,13 @@ docs/*.bbl
 docs/*.blg
 docs/*.out
 docs/*.toc
-docs/*.tex
 docs/*.bib
 docs/*.fls
-docs/*.pdf
+docs/*.lot
+docs/*.lof
 docs/*.synctex.gz
 docs/logos/
 docs/*.fdb_latexmk
-docs/
 
 # OS
 .DS_Store
