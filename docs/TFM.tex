@@ -109,11 +109,11 @@
 
 Cuando se hacen análisis de datos en contextos donde el número de variables explicativas es elevado, se plantean dificultades específicas asociadas a la presencia de relaciones de dependencia entre predictores. En áreas como la quimiometría, la bioinformática o la espectroscopía, esta situación suele generar problemas de multicolinealidad que afectan la estabilidad y la interpretabilidad de los modelos de regresión. Tal como indican Mateos‑Aparicio Morales y Caballero Domínguez, “el problema de la multicolinealidad [...] produce situaciones de inestabilidad de los coeficientes de regresión” \cite{mateos2007}, lo que evidencia una necesidad de utilizar métodos capaces de manejarse en escenarios con alta correlación entre variables.
 
-La regresión por mínimos cuadrados ordinarios (OLS) constituye el punto de partida natural por su simplicidad y sus propiedades en los términos clásicos, sin embargo, presenta limitaciones claras cuando los predictores están altamente correlacionados o cuando la dimensionalidad del problema es elevada. La matriz \(X^\top X\) puede volverse casi singular o no ser invertible, generando estimaciones inestables y sensibles al ruido, con un impacto directo sobre la capacidad predictiva del modelo \cite{hastie2009, samosir2022}.
+La regresión por mínimos cuadrados ordinarios (\textit{Ordinary Least Squares} - OLS) constituye el punto de partida natural por su simplicidad y sus propiedades en los términos clásicos, sin embargo, presenta limitaciones claras cuando los predictores están altamente correlacionados o cuando la dimensionalidad del problema es elevada. La matriz \(X^\top X\) puede volverse casi singular o no ser invertible, generando estimaciones inestables y sensibles al ruido, con un impacto directo sobre la capacidad predictiva del modelo \cite{hastie2009, samosir2022}.
 
-Para abordar estas limitaciones, se han desarrollado métodos basados en regularización y reducción de dimensionalidad. Entre ellos destacan Ridge y Lasso, que estabilizan las estimaciones mediante penalizaciones $L_2$ y $L_1$, respectivamente, y la regresión por componentes principales (PCR), que proyecta los predictores en un subespacio de menor dimensión \cite{hastie2009}. Estas técnicas permiten obtener estimaciones más estables y robustas frente a la correlación entre predictores.
+Para abordar estas limitaciones, se han desarrollado métodos basados en regularización y reducción de dimensionalidad. Entre ellos destacan Ridge y Lasso, que estabilizan las estimaciones mediante penalizaciones $L_2$ y $L_1$, respectivamente, y la regresión por componentes principales (\textit{Principal Component Regression} - PCR), que proyecta los predictores en un subespacio de menor dimensión \cite{hastie2009}. Estas técnicas permiten obtener estimaciones más estables y robustas frente a la correlación entre predictores.
 
-Dentro de este conjunto de métodos, la regresión por mínimos cuadrados parciales (PLS) ocupa un lugar destacado por integrar reducción de dimensionalidad y orientación predictiva. A diferencia de PCR, PLS incorpora explícitamente la relación entre $X$ y $Y$, para así maximizar la covarianza entre ambas matrices \cite{geladi1986}. Este enfoque ha llevado a que PLS sea considerado “the workhorse of chemometrics” \cite{geladi1986}, especialmente cuando hay problemas donde resulta necesario extraer información predictiva a partir de estructuras latentes complejas \cite{alciaturi2003}. Desde que se ha originado PLS, ha sido diseñado para manejar datos ruidosos y altamente colineales, integrando información supervisada en la construcción de componentes \cite{abdi2010}.\\
+Dentro de este conjunto de métodos, la regresión por mínimos cuadrados parciales (\textit{Partial Least Squares} - PLS) ocupa un lugar destacado por integrar reducción de dimensionalidad y orientación predictiva. A diferencia de PCR, PLS incorpora explícitamente la relación entre $X$ e $Y$, para así maximizar la covarianza entre ambas matrices \cite{geladi1986}. Este enfoque ha llevado a que PLS sea considerado “the workhorse of chemometrics” \cite{geladi1986}, especialmente cuando hay problemas donde resulta necesario extraer información predictiva a partir de estructuras latentes complejas \cite{alciaturi2003}. Desde su origen PLS, ha sido diseñado para manejar datos ruidosos y altamente colineales, integrando información supervisada en la construcción de componentes \cite{abdi2010}.\\
 
 La comparación entre PLS y otros métodos alternativos ha sido ampliamente estudiada. Frank y Friedman muestran que, pese a que la regresión Ridge suele presentar un rendimiento ligeramente superior en ciertos escenarios, las diferencias con PLS y PCR son reducidas, lo que refuerza la necesidad de evaluar cada técnica en función de la estructura del problema \cite{frank1993}. Estudios recientes confirman que el rendimiento relativo de PLS depende del grado de multicolinealidad, la presencia de estructura latente y la relación entre las variables explicativas y la respuesta \cite{liu2022}.
 
@@ -149,7 +149,6 @@ El modelo lineal clásico establece una relación entre una variable respuesta \
 \[
 Y = X\beta + \varepsilon,
 \]
-
 donde \(X\) es la matriz de diseño, \(\beta\) es el vector de coeficientes y \(\varepsilon\) representa el término de error, comúnmente asumido con media cero y varianza constante.
 
 Bajo las condiciones clásicas del modelo lineal (linealidad, independencia, homocedasticidad y ausencia de multicolinealidad perfecta) el estimador de mínimos cuadrados ordinarios (OLS) se obtiene como
@@ -160,31 +159,31 @@ Bajo las condiciones clásicas del modelo lineal (linealidad, independencia, hom
 
 siempre que \(X^\top X\) sea invertible. Este estimador es insesgado y presenta varianza mínima dentro de la clase de estimadores lineales insesgados, de acuerdo con el teorema de Gauss‑Markov \cite{hastie2009}.
 
-El comportamiento de OLS depende de manera crítica de la estructura de \(X\). Cuando los predictores están altamente correlacionados, la matriz \(X^\top X\) pasa a estar mal condicionada, amplificando la varianza de los coeficientes y generando estimaciones extremadamente sensibles a pequeñas perturbaciones en los datos. Este fenómeno fue descrito por Hoerl y Kennard, quienes mostraron que la no ortogonalidad entre predictores conduce a varianzas infladas y a inestabilidad numérica en la inversión de \(X^\top X\) \cite{hoerl1970}.  En términos prácticos, la multicolinealidad dificulta la identificación de la contribución individual de cada predictor y puede producir coeficientes con signos inesperados o magnitudes poco realistas.
+El comportamiento de OLS depende de manera crítica de la estructura de \(X\). Cuando los predictores están altamente correlacionados, la matriz \(X^\top X\) pasa a estar mal condicionada, amplificando la varianza de los coeficientes y generando estimaciones extremadamente sensibles a pequeñas perturbaciones en los datos. Este fenómeno fue descrito por Hoerl y Kennard, quienes mostraron que la no ortogonalidad entre predictores conduce a varianzas infladas y a inestabilidad numérica en la inversa de \(X^\top X\) \cite{hoerl1970}.  En términos prácticos, la multicolinealidad dificulta la identificación de la contribución individual de cada predictor y puede producir coeficientes con signos inesperados o magnitudes poco realistas.
 
 Estudios recientes confirman este comportamiento. En el trabajo \textit{Investigating the Impact of Multicollinearity on Linear Regression Estimates}\cite{akinwande2015}, los autores muestran mediante simulaciones que la multicolinealidad incrementa la varianza de los coeficientes, deteriora la precisión predictiva y reduce la fiabilidad de los intervalos de confianza. Mateos‑Aparicio Morales y Caballero Domínguez \cite{mateos2007} señalan que la multicolinealidad “produce inestabilidad de los coeficientes de regresión”, incluso cuando el ajuste global del modelo es elevado. También, en el estudio \textit{Collinearity: a review of methods to deal with it and a simulation study evaluating their performance}\cite{dormann2013}, confirma que la presencia de predictores altamente correlacionados genera coeficientes inestables, sensibles a pequeñas perturbaciones en los datos, y afecta negativamente tanto a la interpretación como al rendimiento predictivo del modelo.
 
-Los problemas se intensifican en situaciones donde el número de predictores es grande respecto al tamaño muestral. Cuando \(p\) es comparable a \(n\), la matriz \(X^\top X\) puede acercarse a la singularidad. Cuando \(p \gg n\), la matriz \(X^\top X\) deja de ser invertible, por lo que la formulación clásica del estimador OLS basada en la inversión directa de \(X^\top X\) no puede aplicarse.
+Los problemas se intensifican en situaciones donde el número de predictores es grande respecto al tamaño muestral. Cuando \(p\) es comparable a \(n\), la matriz \(X^\top X\) puede acercarse a la singularidad. Cuando \(p \gg n\), la matriz \(X^\top X\) deja de ser invertible, por lo que la formulación clásica del estimador OLS basada en la inversa directa de \(X^\top X\) no puede aplicarse.
 
 No obstante, desde el punto de vista computacional, implementaciones modernas basadas en descomposición en valores singulares (SVD) o pseudoinversa de Moore--Penrose permiten obtener soluciones de mínimos cuadrados incluso en escenarios \(p > n\), aunque dichas soluciones suelen presentar elevada varianza y riesgo de sobreajuste \cite{hastie2009}.
 
-Este tipo de situaciones suele presentarse en áreas como la bioinformática, la genómica o la espectroscopía, donde la dimensionalidad de los datos supera el número de observaciones. Como señala Abdi \cite{abdi2010}, estos contextos \textit{small \(n\), large \(p\)} hacen que los métodos clásicos basados en la inversión de \(X^\top X\) no puedan aplicarse, requiriendo técnicas que reduzcan la dimensionalidad o introduzcan regularización.
+Este tipo de situaciones suele presentarse en áreas como la bioinformática, la genómica o la espectroscopía, donde la dimensionalidad de los datos supera el número de observaciones. Como señala Abdi \cite{abdi2010}, estos contextos \textit{small \(n\), large \(p\)} hacen que los métodos clásicos basados en la inversa de \(X^\top X\) no puedan aplicarse, requiriendo técnicas que reduzcan la dimensionalidad o introduzcan regularización.
 
 La multicolinealidad, la no ortogonalidad entre predictores y la alta dimensionalidad  generan problemas de varianza inflada, inestabilidad de los coeficientes y sensibilidad extrema al ruido. Estas limitaciones justifican la necesidad de métodos alternativos que modifiquen el criterio de mínimos cuadrados mediante penalizaciones o transformen el espacio de predictores para obtener estimaciones más estables y modelos con mejor capacidad predictiva.
 
 \section{Métodos alternativos frente a la multicolinealidad}
 
-La presencia de multicolinealidad o de estructuras de alta dimensionalidad en los predictores ha motivado el desarrollo de técnicas que modifican el criterio de mínimos cuadrados o que transforman el espacio de variables para mejorar la estabilidad del modelo. Estas metodologías introducen regularización o reducción de dimensionalidad con el objetivo de controlar la varianza del estimador y estabilizar la inversión de \(X^\top X\), reducir la sensibilidad al ruido y mejorar la capacidad predictiva en escenarios donde el estimador OLS resulta inestable o no puede calcularse \cite{hastie2009}.
+La presencia de multicolinealidad o de estructuras de alta dimensionalidad en los predictores ha motivado el desarrollo de técnicas que modifican el criterio de mínimos cuadrados o que transforman el espacio de variables para mejorar la estabilidad del modelo. Estas metodologías introducen regularización o reducción de dimensionalidad con el objetivo de controlar la varianza del estimador y estabilizar la inversa de \(X^\top X\), reducir la sensibilidad al ruido y mejorar la capacidad predictiva en escenarios donde el estimador OLS resulta inestable o no puede calcularse \cite{hastie2009}.
 
 Entre los métodos más utilizados se encuentran la regresión Ridge y la regresión Lasso, que incorporan penalizaciones \(L_2\) y \(L_1\) respectivamente, y la regresión por componentes principales (PCR) que proyecta los predictores en un subespacio de menor dimensión antes de ajustar el modelo. 
 
-La regresión Ridge ha mostrado un rendimiento superior a OLS en escenarios con multicolinealidad y autocorrelación, proporcionando estimaciones más estables y menores errores cuadráticos medios. Hussein y Awadallah \cite{hussein2021} muestran mediante simulaciones Monte Carlo que el estimador Two-Stage Ridge (TR) puede superar al Ridge clásico en términos de MSE. La regresión Lasso introduce sparsity y permite realizar selección automática de variables mediante la penalización absoluta, tal como fue establecido en el trabajo fundacional de Tibshirani \cite{tibshirani1996}. PCR reduce la dimensionalidad mediante componentes ortogonales obtenidas a partir de un análisis de varianza de \(X\), aunque su principal limitación es que las componentes se construyen sin utilizar información de la variable respuesta \cite{pascual2020}.
+La regresión Ridge ha mostrado un rendimiento superior a OLS en escenarios con multicolinealidad y autocorrelación, proporcionando estimaciones más estables y menores errores cuadráticos medios. Hussein y Awadallah \cite{hussein2021} muestran mediante simulaciones de Monte Carlo que el estimador Two-Stage Ridge (TR) puede superar al Ridge clásico en términos del error cuadrático medio (\textit{Mean Squared Error} - MSE). La regresión Lasso introduce soluciones dispersas (\textit{sparsity}) y permite realizar selección automática de variables mediante la penalización absoluta, tal como fue establecido en el trabajo fundacional de Tibshirani \cite{tibshirani1996}. PCR reduce la dimensionalidad mediante componentes ortogonales obtenidas a partir de un análisis de varianza de \(X\), aunque su principal limitación es que las componentes se construyen sin utilizar información de la variable respuesta \cite{pascual2020}.
 
 Estas técnicas constituyen las aproximaciones más empleadas en regresión lineal bajo multicolinealidad y permiten introducir la regresión por mínimos cuadrados parciales (PLS), un método que combina reducción de dimensionalidad y orientación supervisada mediante la construcción de componentes latentes que maximizan la covarianza entre \(X\) y \(Y\) \cite{geladi1986,abdi2010}.
 
 \subsection{Regresión Ridge}
 
-La regresión Ridge fue introducida por Hoerl y Kennard \cite{hoerl1970} como respuesta directa a los problemas que aparecen cuando los predictores no son ortogonales. Esta modifica el sistema normal mediante la incorporación de un parámetro de regularización \(k>0\), lo que permite estabilizar la inversión de \(X^\top X\) en presencia de multicolinealidad. El estimador resultante se define como
+La regresión Ridge fue introducida por Hoerl y Kennard \cite{hoerl1970} como respuesta directa a los problemas que aparecen cuando los predictores no son ortogonales. Esta modifica el sistema normal mediante la incorporación de un parámetro de regularización \(k>0\), lo que permite estabilizar la inversa de \(X^\top X\) en presencia de multicolinealidad. El estimador resultante se define como
 
 \[
 \hat{\beta}_{ridge} = (X^{\top}X + kI)^{-1} X^{\top}Y.
@@ -196,7 +195,7 @@ La formulación clásica del estimador Ridge aparece desarrollada en \textit{Per
 \hat{B}_x = (X'X + kI)^{-1} X'y 
 \]
 
-La inclusión del parámetro \(k\) introduce sesgo en la estimación, pero reduce considerablemente la varianza de los coeficientes, lo que permite mejorar la estabilidad del modelo en presencia de multicolinealidad. Este mecanismo de \textit{shrinkage}, entendido como la reducción de la magnitud de los coeficientes para controlar la varianza \cite{hastie2009}, acorta el vector de coeficientes y evita que los autovalores pequeños de \(X^\top X\) amplifiquen el ruido en los datos. En el trabajo de Fitrianto et al.\ \cite{fitrianto2014} se muestra que cuando la matriz de diseño está mal condicionada la reducción de varianza introducida por Ridge domina el sesgo añadido por la penalización, produciendo valores de MSE inferiores a los obtenidos mediante OLS.
+La inclusión del parámetro \(k\) introduce sesgo en la estimación, pero reduce considerablemente la varianza de los coeficientes, lo que permite mejorar la estabilidad del modelo en presencia de multicolinealidad. Este mecanismo de \textit{shrinkage}, entendido como la reducción de la magnitud de los coeficientes para controlar la varianza \cite{hastie2009}, acorta el vector de coeficientes y evita que los autovalores pequeños de \(X^\top X\) aumenten el ruido en los datos. En el trabajo de Fitrianto et al.\ \cite{fitrianto2014} se muestra que cuando la matriz de diseño está mal condicionada la reducción de varianza introducida por Ridge domina el sesgo añadido por la penalización, produciendo valores de MSE inferiores a los obtenidos mediante OLS.
 
 Hay trabajos que también analizan variantes del estimador Ridge orientadas a optimizar la elección del parámetro de regularización. En \textit{Some ridge regression estimators and their performances} \cite{kibria2016}, los autores revisan diferentes propuestas para seleccionar \(k\) y muestran, mediante simulaciones, que ciertos estimadores modificados pueden mejorar el MSE en escenarios de multicolinealidad severa. De forma complementaria, Lattef y Alheety \cite{lattef2020} presentan un estudio basado en simulaciones Monte Carlo donde comparan distintos estimadores Ridge y concluyen que los enfoques penalizados proporcionan estimaciones más estables y menores errores cuadráticos medios que OLS bajo alta correlación entre predictores.
 
@@ -204,7 +203,7 @@ Estos resultados muestran que la regresión Ridge representa una estrategia efic
 
 \subsection{Regresión Lasso}
 
-La regresión Lasso (\textit{Least Absolute Shrinkage and Selection Operator}) nace como una alternativa a los métodos clásicos de selección de variables y a las técnicas de regularización basadas en penalización cuadrática \cite{tibshirani1996}. Su característica distintiva es la incorporación de una penalización \(L_1\) sobre los coeficientes, lo que conduce a soluciones esparsas y permite realizar selección automática de variables. El estimador Lasso se define como la solución del problema
+La regresión Lasso (\textit{Least Absolute Shrinkage and Selection Operator}) nace como una alternativa a los métodos clásicos de selección de variables y a las técnicas de regularización basadas en penalización cuadrática \cite{tibshirani1996}. Su característica distintiva es la incorporación de una penalización \(L_1\) sobre los coeficientes, lo que conduce a soluciones dispersas (\textit{sparse solutions}) y permite realizar selección automática de variables. El estimador Lasso se define como la solución del problema
 
 \[
 \hat{\beta}_{lasso}
@@ -214,18 +213,17 @@ La regresión Lasso (\textit{Least Absolute Shrinkage and Selection Operator}) n
 + \lambda \sum_{j=1}^p |\beta_j|
 \right\},
 \]
-
 donde \(\lambda > 0\) controla el grado de regularización. A diferencia de la penalización \(L_2\) de Ridge, que reduce la magnitud de los coeficientes pero rara vez los anula, la penalización absoluta induce un mecanismo de \textit{soft‑thresholding} que puede hacer que algunos coeficientes sean exactamente cero, integrando en un único procedimiento regularización y selección de variables \cite{hastie2009}.
 
-Tibshirani \cite{tibshirani1996} mostró que la penalización \(L_1\) además de reducir la magnitud de los coeficientes, puede forzar que algunos de ellos sean exactamente cero, produciendo soluciones esparsas (\textit{sparse solutions}). Este comportamiento se conoce como \textit{sparsity}, entendido como la obtención de modelos en los que solo un subconjunto reducido de coeficientes es distinto de cero.
+Tibshirani \cite{tibshirani1996} mostró que la penalización \(L_1\) además de reducir la magnitud de los coeficientes, puede forzar que algunos de ellos sean exactamente cero, produciendo soluciones dispersas. Este comportamiento se conoce como \textit{sparsity}, entendido como la obtención de modelos en los que solo un subconjunto reducido de coeficientes es distinto de cero.
 
 Posteriormente, Hastie, Tibshirani y Friedman \cite{hastie2009} destacan que esta propiedad permite identificar predictores relevantes y simplificar la interpretación del modelo. Asimismo, Zou y Hastie \cite{zou2005} señalan que, en presencia de multicolinealidad, Lasso tiende a seleccionar una sola variable dentro de grupos altamente correlacionados, reduciendo la redundancia entre predictores, favoreciendo modelos más simples y con mayor \textit{sparsity}.
 
-Desde un punto de vista teórico, Leng, Lin y Wahba \cite{leng2006} revisan las propiedades asintóticas de los estimadores tipo Lasso estudiadas previamente por Knight y Fu, destacando que bajo condiciones adecuadas estos estimadores son consistentes para la estimación de los coeficientes y que su distribución límite puede asignar probabilidad positiva a coeficientes exactamente nulos cuando el verdadero valor del parámetro es cero. Estas propiedades proporcionan una base teórica para la capacidad del Lasso de realizar selección automática de variables en contextos de alta dimensionalidad. El mismo trabajo muestra además que cuando el parámetro de regularización se selecciona únicamente mediante criterios de precisión predictiva, el Lasso puede no ser consistente en la identificación del modelo verdadero. Los autores destacan entonces la importancia de combinar el ajuste predictivo con estrategias adecuadas de validación y selección del parámetro de penalización.
+Desde un punto de vista teórico, Leng, Lin y Wahba \cite{leng2006} revisan las propiedades asintóticas de los estimadores tipo Lasso estudiadas previamente por Knight y Fu, destacando que bajo condiciones adecuadas estos estimadores son consistentes para la estimación de los coeficientes y que su distribución límite puede asignar probabilidad positiva a coeficientes exactamente nulos cuando el verdadero valor del parámetro es cero. Estas propiedades proporcionan una base teórica para la capacidad del Lasso de realizar selección automática de variables en contextos de alta dimensionalidad. El mismo trabajo muestra además que cuando el parámetro de regularización se selecciona únicamente mediante criterios de precisión predictiva, el Lasso puede no ser consistente en la identificación del verdadero modelo. Los autores destacan entonces la importancia de combinar el ajuste predictivo con estrategias adecuadas de validación y selección del parámetro de penalización.
 
 Los estudios empíricos recogidos en la literatura muestran que Lasso tiende a producir modelos más parsimoniosos que Ridge, especialmente cuando el número de predictores es elevado o cuando se sospecha que muchos de ellos son irrelevantes. Ademas lo agresivo de la penalización \(L_1\) puede introducir un sesgo adicional al anular coeficientes, esto se traduce en un ligero aumento del error de predicción en escenarios donde la mayoría de las variables contienen información útil. Para esto Ridge suele ofrecer una mayor estabilidad predictiva, mientras que Lasso resulta especialmente adecuado cuando se espera que solo un subconjunto reducido de variables tenga un efecto significativo.
 
-Finalmente la regresión Lasso constituye una herramienta eficaz para construir modelos parsimoniosos capaces de identificar automáticamente variables relevantes, combinando regularización y selección de variables en un marco unificado. Su capacidad para generar modelos esparsos facilita la interpretación y permite identificar predictores relevantes incluso en situaciones donde \(p \gg n\). Posteriormente, Zou y Hastie \cite{zou2005} propusieron el método Elastic Net, que combina penalizaciones \(L_1\) y \(L_2\) con el objetivo de equilibrar la \textit{sparsity} característica de Lasso con la estabilidad de Ridge, especialmente en contextos con grupos de predictores altamente correlacionados.
+Finalmente la regresión Lasso constituye una herramienta eficaz para construir modelos parsimoniosos capaces de identificar automáticamente variables relevantes, combinando regularización y selección de variables en un marco unificado. Su capacidad para generar modelos dispersos facilita la interpretación y permite identificar predictores relevantes incluso en situaciones donde \(p \gg n\). Posteriormente, Zou y Hastie \cite{zou2005} propusieron el método Elastic Net, que combina penalizaciones \(L_1\) y \(L_2\) con el objetivo de equilibrar el carácter disperso característico de Lasso con la estabilidad de Ridge, especialmente en contextos con grupos de predictores altamente correlacionados.
 
 
 \subsection{Regresión por Componentes Principales (PCR)}
@@ -235,13 +233,11 @@ La regresión por componentes principales (PCR) combina el análisis de componen
 \[
 X = U D V^{\top},
 \]
-
 donde \(V\) contiene las direcciones principales y
 
 \[
 T = U D
 \]
-
 representa la matriz de componentes principales. Estas se pueden interpretar como variables latentes ortogonales obtenidas a partir de las combinaciones lineales de los predictores originales y maximizan secuencialmente la varianza explicada de los predictores \cite{abdi2010, liu2022}. 
 
 El modelo PCR se obtiene ajustando una regresión lineal sobre las primeras \(k\) componentes principales seleccionadas:
@@ -249,14 +245,13 @@ El modelo PCR se obtiene ajustando una regresión lineal sobre las primeras \(k\
 \[
 \hat{y} = T \beta,
 \]
-
 eligiendo aquellas que capturan la mayor parte de la variabilidad en \(X\). Abdi \cite{abdi2010} describe detalladamente esta formulación y destaca que las componentes principales se construyen sin utilizar información de la variable respuesta \(Y\). Esta característica constituye la principal limitación de PCR, la selección de componentes se basa exclusivamente en la estructura de \(X\), lo que puede limitar la capacidad predictiva del modelo cuando información relevante para \(Y\) se encuentra en componentes de baja varianza. \cite{liu2022}.
 
 Garthwaite \cite{garthwaite1994} enfatiza esta limitación al comparar PCR con PLS, señalando que PCR puede perder información relevante para la predicción al no incorporar \(Y\) en la construcción de las componentes, mientras que PLS orienta las componentes hacia la covarianza entre \(X\) y \(Y\), lo que suele traducirse en un mejor rendimiento predictivo.
 
-PCR también se ha utilizado en contextos de alta dimensionalidad, manteniendo la idea de reducción de dimensionalidad mediante componentes ortogonales, aunque dejando la limitación asociada a la ausencia de supervisión en la construcción de las componentes. El estudio \textit{Least Squares Regression Principal Component Analysis} \cite{pascual2020} profundiza en la formulación matemática de PCR y en su relación con la regresión lineal clásica, destacando su utilidad para estabilizar la estimación cuando \(X^\top X\) es mal condicionada.
+PCR también se ha utilizado en contextos de alta dimensionalidad, manteniendo la idea de reducción de dimensionalidad mediante componentes ortogonales, aunque dejando la limitación asociada a la ausencia de supervisión en la construcción de las componentes. El estudio \textit{Least Squares Regression Principal Component Analysis} \cite{pascual2020} profundiza en la formulación matemática de PCR y en su relación con la regresión lineal clásica, destacando su utilidad para estabilizar la estimación cuando \(X^\top X\) está mal condicionada.
 
-PCR proporciona una solución eficaz para mitigar la multicolinealidad mediante la construcción de componentes ortogonales y la reducción de dimensionalidad. Su principal ventaja radica en la estabilidad numérica y en su capacidad para manejar situaciones donde \(p\) es grande en relación con \(n\). Sin embargo, su naturaleza no supervisada limita su rendimiento predictivo, lo que motiva el uso de métodos como PLS, que incorporan información de \(Y\) en la construcción de las componentes latentes.
+PCR proporciona una solución eficaz para mitigar la multicolinealidad mediante la construcción de componentes ortogonales y la reducción de la dimensionalidad. Su principal ventaja radica en la estabilidad numérica y en su capacidad para manejar situaciones donde \(p\) es grande en relación con \(n\). Sin embargo, su naturaleza no supervisada limita su rendimiento predictivo, lo que motiva el uso de métodos como PLS, que incorporan información de \(Y\) en la construcción de las componentes latentes.
 
 \section{Regresión por mínimos cuadrados parciales (PLS)}
 
@@ -287,7 +282,6 @@ El primer componente de PLS se obtiene resolviendo el problema:
 \[
 \max_{\mathbf{w},\,\mathbf{c}} \; \mathrm{Cov}(X\mathbf{w},\,Y\mathbf{c}),
 \]
-
 donde \(\mathbf{w}\) y \(\mathbf{c}\) son los vectores de pesos que definen las proyecciones de \(X\) y \(Y\). Esta formulación garantiza que las componentes extraídas sean predictivamente relevantes, ya que están orientadas hacia la relación entre las dos matrices.
 
 \subsubsection*{Scores y loadings}
@@ -297,7 +291,6 @@ A partir de los vectores de pesos, se construyen los \textit{scores}:
 \[
 \mathbf{t} = X\mathbf{w}, \qquad \mathbf{u} = Y\mathbf{c},
 \]
-
 que representan las variables latentes de \(X\) y \(Y\).
 
 Los \textit{loadings} se obtienen como:
@@ -317,7 +310,6 @@ Tras extraer \(A\) componentes, PLS genera las descomposiciones:
 \[
 X = T P^\top + E, \qquad Y = U Q^\top + F,
 \]
-
 donde:
 
 - \(T\) y \(U\) son las matrices de \textit{scores},
@@ -431,7 +423,7 @@ Ambos algoritmos implementan la misma idea fundamental la cual es extraer compon
 
 La regresión por mínimos cuadrados parciales presenta propiedades que explican su amplia adopción en contextos donde los métodos clásicos muestran inestabilidad o pérdida de capacidad predictiva. Su orientación supervisada y su capacidad para manejar multicolinealidad y alta dimensionalidad la han consolidado como una herramienta fundamental en quimiometría, bioinformática y análisis espectral. Boulesteix y Strimmer \cite{boulesteix2007} destacan además que PLS combina reducción de dimensionalidad y regresión en un único procedimiento, proporcionando una elevada eficiencia computacional incluso en escenarios \(p \gg n\).
 
-Samosir et al.\ \cite{samosir2022} muestran que PLS ofrece un mejor rendimiento predictivo en presencia de predictores altamente correlacionados, al construir componentes que maximizan la covarianza entre \(X\) y \(Y\). Del mismo modo, Wold et al.\ \cite{wold2001} demostraron que PLS puede producir modelos estables incluso cuando \(p \gg n\), comportamiento confirmado en aplicaciones modernas como las descritas por Wagala et al. \cite{wagala2020}, aplican extensiones de PLS a problemas de clasificación en datos genómicos y microarrays de alta dimensionalidad.
+Samosir et al.\ \cite{samosir2022} muestran que PLS ofrece un mejor rendimiento predictivo en presencia de predictores altamente correlacionados, al construir componentes que maximizan la covarianza entre \(X\) y \(Y\). Del mismo modo, Wold et al.\ \cite{wold2001} demostraron que PLS puede producir modelos estables incluso cuando \(p \gg n\), comportamiento confirmado en aplicaciones modernas como las descritas por Wagala et al. \cite{wagala2020}, que aplican extensiones de PLS a problemas de clasificación en datos genómicos y microarrays de alta dimensionalidad.
 
 Otra ventaja relevante es que la reducción de dimensionalidad se integra en el propio proceso de modelización. Pascual \cite{pascual2020} destaca que los enfoques supervisados de reducción de dimensionalidad como PLS construyen componentes orientadas hacia la variable respuesta, permitiendo obtener representaciones compactas con mayor capacidad predictiva. Estudios de simulación recientes muestran además que el rendimiento relativo de PLS depende de la estructura del problema. Göktaş y Akkuş \cite{goktas2020} comparan PLS, PCR y Ridge bajo distintos niveles de correlación y tamaños muestrales, observando que PLS suele ofrecer un comportamiento predictivo competitivo en escenarios moderados de multicolinealidad, mientras que PCR puede resultar favorable cuando la correlación entre predictores es extremadamente elevada.
 
@@ -447,7 +439,7 @@ Uno de los ámbitos donde PLS alcanzó su desarrollo inicial fue la quimiometrí
 
 El uso de PLS se ha extendido posteriormente a la bioinformática y la genómica, donde la dimensionalidad de los datos es aún más extrema. Boulesteix y Strimmer \cite{boulesteix2007} destacan que los microarrays de expresión génica, la proteómica y la metabolómica generan matrices con miles de variables y un número muy reducido de muestras, lo que hace inviable la aplicación de métodos clásicos. En este contexto, PLS se ha consolidado como una herramienta versátil para la clasificación, la selección de biomarcadores y la predicción de perfiles moleculares, gracias a la construcción de componentes orientadas a maximizar la covarianza entre predictores y respuesta. Nguyen y Rocke \cite{nguyen2004} muestran mediante simulaciones aplicadas a microarrays que PLS puede superar a métodos basados en PCA en tareas de clasificación cuando la estructura de los datos presenta alta dimensionalidad y fuerte correlación entre variables.
 
-Además Wagala et al.\ \cite{wagala2020} desarrollan extensiones de PLS generalizado aplicadas a problemas de clasificación en microarrays, mostrando que estas metodologías mantienen una buena capacidad predictiva incluso en presencia de alta dimensionalidad, ruido y fuerte multicolinealidad. En el trabajo de Land et al.\ \cite{land2011} exploran versiones kernelizadas de PLS (K-PLS), mostrando que la incorporación de funciones kernel permite extender el método a relaciones no lineales y mejorar el rendimiento en tareas de clasificación genómica y reducción de dimensionalidad.
+Además Wagala et al.\ \cite{wagala2020} desarrollan extensiones de PLS generalizado aplicadas a problemas de clasificación en microarrays, mostrando que estas metodologías mantienen una buena capacidad predictiva incluso en presencia de alta dimensionalidad, ruido y fuerte multicolinealidad. En el trabajo de Land et al.\ \cite{land2011} exploran versiones núcleo de PLS (K-PLS), mostrando que la incorporación de funciones núcleo permite extender el método a relaciones no lineales y mejorar el rendimiento en tareas de clasificación genómica y reducción de dimensionalidad.
 
 Aplicaciones más recientes han explorado el uso de PLS en tareas de clasificación supervisada en alta dimensionalidad. Ruiz-Perez y Narasimhan \cite{ruizperez2020} muestran que variantes como PLS-DA se utilizan ampliamente en metabolómica y estudios clínicos, donde la estructura \(p \gg n\) es la norma. Estos trabajos destacan tanto el potencial predictivo del método como la necesidad de aplicar procedimientos rigurosos de validación cruzada para evitar sobreajuste, especialmente cuando la señal es débil en relación con el ruido.
 
@@ -565,7 +557,7 @@ homogénea a todos los modelos.
 
 \section{Descripción de los datasets}
 
-Como se muestra en la Tabla~\ref{tabla:datasets}, los tres conjuntos de datos seleccionados representan escenarios contrastantes en términos de dimensionalidad, estructura latente y grado de multicolinealidad, lo que permite evaluar el comportamiento de los modelos en condiciones diversas y representativas. 
+Como se muestra en la Tabla~\ref{tabla:datasets}, los tres conjuntos de datos seleccionados representan escenarios diferentes en términos de dimensionalidad, estructura latente y grado de multicolinealidad, lo que permite evaluar el comportamiento de los modelos en condiciones diversas y representativas. 
 
 \begin{table}[H]
 \centering
@@ -625,7 +617,7 @@ El dataset Riboflavin corresponde a un estudio de expresión génica en \textit{
 
     \item \textbf{Sparsity}: se espera que solo un subconjunto reducido de genes contribuya de forma relevante a la respuesta.
 
-    \item \textbf{Escenario crítico para OLS}: la matriz $X^\top X$ es singular, por lo que la formulación clásica basada en la inversión directa no puede aplicarse. Sin embargo, implementaciones computacionales modernas basadas en pseudoinversa permiten obtener soluciones numéricas, aunque potencialmente inestables.
+    \item \textbf{Escenario crítico para OLS}: la matriz $X^\top X$ es singular, por lo que la formulación clásica basada en la inversa directa no puede aplicarse. Sin embargo, implementaciones computacionales modernas basadas en pseudoinversa permiten obtener soluciones numéricas, aunque potencialmente inestables.
 \end{itemize}
 
 El dataset Riboflavin contempla un escenario especialmente adecuado para evaluar el comportamiento de PLS, PCR y los métodos de regularización en contextos de alta dimensionalidad.
@@ -651,7 +643,7 @@ Se realizó una inspección exploratoria mediante gráficos y análisis descript
 \section{Modelos Implementados}
 
 Todos los modelos fueron implementados utilizando \textit{scikit-learn}, bajo una 
-estructura homogénea de entrenamiento, validación y evaluación, garantizando así la comparabilidad entre técnicas dentro de un mismo \textit{pipeline} experimental.
+estructura homogénea de entrenamiento, validación y evaluación, garantizando así la comparativa entre técnicas dentro de un mismo \textit{pipeline} experimental.
 
 \begin{itemize}
     \item \textbf{OLS (LinearRegression)}: modelo base sin regularización, empleado como referencia para evaluar el impacto de la multicolinealidad y la alta dimensionalidad. La estimación se realizó mediante la implementación \texttt{LinearRegression} de \textit{scikit-learn}, que utiliza internamente descomposición SVD y pseudoinversa, permitiendo obtener soluciones numéricas incluso cuando \(X^\top X\) es singular.
@@ -662,7 +654,7 @@ estructura homogénea de entrenamiento, validación y evaluación, garantizando 
 
     \item \textbf{PCR}: aplicación de PCA sobre los predictores seguida de regresión lineal; el número de componentes se determinó mediante validación cruzada.
 
-    \item \textbf{PLS (PLSRegression)}: extracción supervisada de componentes latentes que maximizan la covarianza entre $X$ y $Y$; el número de componentes se seleccionó mediante RMSE-CV.
+    \item \textbf{PLS (PLSRegression)}: extracción supervisada de componentes latentes que maximizan la covarianza entre $X$ e $Y$; el número de componentes se seleccionó mediante RMSE-CV.
 \end{itemize}
 
 \section{Estrategia de validación}
@@ -797,7 +789,7 @@ Implementaciones de OLS, Ridge, Lasso, PCR y PLS bajo una interfaz común. \\
 
 \section{Pipeline Computacional}
 
-El flujo computacional implementado puede representarse mediante el siguiente esquema mostrado en la Figura~\ref{fig:pipeline_computacional}. Este se ejecuta de forma automática para los tres conjuntos de datos, garantizando homogeneidad experimental.
+El flujo computacional implementado puede representarse mediante el siguiente esquema mostrado en la Figura~\ref{fig:pipeline_computacional}. Éste se ejecuta de forma automática para los tres conjuntos de datos, garantizando homogeneidad experimental.
 
 Las etapas principales son:
 
@@ -1054,7 +1046,7 @@ En este caso, la estructura latente no resulta suficientemente compleja como par
 
 PCR presenta un comportamiento ligeramente inferior a PLS, resultado coherente con la construcción supervisada de las componentes latentes en PLS. PCR maximiza exclusivamente la varianza explicada en $X$ y PLS incorpora información de la variable respuesta durante la extracción de componentes, favoreciendo direcciones predictivamente más relevantes.
 
-Por otro lado, Ridge y Lasso presentan el peor comportamiento global. Aunque ambos métodos estabilizan la estimación mediante regularización, la penalización introducida genera una contracción excesiva de coeficientes en un escenario donde OLS todavía conserva estabilidad suficiente. Lasso particularmente produce soluciones más esparsas que pueden eliminar información útil distribuida en múltiples variables espectrales altamente correlacionadas.
+Por otro lado, Ridge y Lasso presentan el peor comportamiento global. Aunque ambos métodos estabilizan la estimación mediante regularización, la penalización introducida genera una contracción excesiva de coeficientes en un escenario donde OLS todavía conserva estabilidad suficiente. Lasso particularmente produce soluciones más dispersas que pueden eliminar información útil distribuida en múltiples variables espectrales altamente correlacionadas.
 
 La representación gráfica de la Figura \ref{fig:rmse_tecator} confirma los resultados observados previamente en la Tabla \ref{tab:tecator_results}.
 
@@ -1411,7 +1403,7 @@ Los resultados obtenidos por OLS deben interpretarse con cautela. En escenarios 
 
 El estudio realizado sobre los conjuntos de datos \textit{Riboflavin}, \textit{Gasoline} y \textit{Tecator} permite observar que el comportamiento de los distintos métodos de regresión no depende únicamente de la presencia de multicolinealidad, sino también de la forma concreta en que se organiza la información en los datos. Aspectos como la relación entre el número de observaciones y predictores, la complejidad de la estructura latente o la manera en que la señal predictiva se distribuye entre las variables condicionan de forma directa la estabilidad y la capacidad de generalización de cada técnica.
 
-En \textit{Riboflavin}, el problema se sitúa claramente en un escenario de ultra alta dimensionalidad, donde \(p \gg n\). En estos casos los métodos clásicos basados en la inversión de \(X^\top X\) dejan de ser viables o presentan una gran inestabilidad numérica. Los resultados muestran que PLS consigue adaptarse especialmente bien a esta estructura, ya que logra concentrar la información predictiva en un número reducido de componentes supervisadas. Ridge mantiene también un comportamiento sólido gracias al efecto estabilizador de la penalización \(L_2\), mientras que PCR pierde eficiencia al construir componentes sin utilizar información de la respuesta. En el caso de Lasso, la penalización \(L_1\) induce una selección demasiado agresiva para un problema donde la señal parece distribuida entre múltiples genes correlacionados y no únicamente concentrada en unas pocas variables aisladas.
+En \textit{Riboflavin}, el problema se sitúa claramente en un escenario de ultra alta dimensionalidad, donde \(p \gg n\). En estos casos los métodos clásicos basados en la inversa de \(X^\top X\) dejan de ser viables o presentan una gran inestabilidad numérica. Los resultados muestran que PLS consigue adaptarse especialmente bien a esta estructura, ya que logra concentrar la información predictiva en un número reducido de componentes supervisadas. Ridge mantiene también un comportamiento sólido gracias al efecto estabilizador de la penalización \(L_2\), mientras que PCR pierde eficiencia al construir componentes sin utilizar información de la respuesta. En el caso de Lasso, la penalización \(L_1\) induce una selección demasiado agresiva para un problema donde la señal parece distribuida entre múltiples genes correlacionados y no únicamente concentrada en unas pocas variables aisladas.
 
 El comportamiento observado en \textit{Gasoline} es diferente. Aunque sigue existiendo una fuerte multicolinealidad y una estructura espectral altamente correlacionada, la naturaleza de la señal favorece a los métodos de regularización. Lasso alcanza el mejor rendimiento predictivo, lo que sugiere que parte de la información relevante se encuentra localizada en determinadas regiones del espectro. PCR también obtiene resultados competitivos, indicando que buena parte de la variabilidad útil puede resumirse mediante un número reducido de componentes principales. Por su parte, PLS mantiene un rendimiento estable, aunque sin alcanzar la precisión de los modelos penalizados, lo que parece indicar que la estructura supervisada de las componentes no aporta aquí una ventaja tan clara como en escenarios de dimensionalidad más extrema.
 
@@ -1429,7 +1421,7 @@ De forma conjunta, los resultados muestran que no existe un método universalmen
 
 Los resultados obtenidos refuerzan la idea de que la selección de un método de regresión no debe basarse únicamente en su rendimiento empírico, sino también en la comprensión de la estructura estadística del problema. La validación cruzada permite seleccionar configuraciones con buena capacidad predictiva, pero no sustituye el análisis de la dimensionalidad, la correlación entre predictores ni la naturaleza de la señal subyacente.
 
-Finalmente, como posibles líneas futuras, resultaría interesante extender el análisis hacia variantes más flexibles de PLS, métodos kernelizados y enfoques híbridos que integren reducción supervisada de dimensionalidad con técnicas de regularización, especialmente en problemas de muy alta dimensionalidad o con relaciones no lineales entre variables.
+Finalmente, como posibles líneas futuras, resultaría interesante extender el análisis hacia variantes más flexibles de PLS, métodos basados en núcleos y enfoques híbridos que integren reducción supervisada de dimensionalidad con técnicas de regularización, especialmente en problemas de muy alta dimensionalidad o con relaciones no lineales entre variables.
 
 
 \chapter{Conclusiones}
@@ -1454,7 +1446,7 @@ Aunque el estudio ha permitido comparar de forma rigurosa distintos métodos de 
 
 En segundo lugar, la selección de hiperparámetros se ha realizado mediante rejillas discretas. Aunque este procedimiento es estándar, métodos más flexibles como la optimización bayesiana podrían explorar el espacio de parámetros de manera más eficiente.
 
-Otra limitación es que el estudio se ha basado en tres conjuntos de datos concretos. Aunque representan escenarios contrastantes, no permiten generalizar completamente los resultados a otros dominios donde la estructura latente o la distribución de la señal puedan ser diferentes.
+Otra limitación es que el estudio se ha basado en tres conjuntos de datos concretos. Aunque representan escenarios diferenciados, no permiten generalizar completamente los resultados a otros dominios donde la estructura latente o la distribución de la señal puedan ser diferentes.
 
 Además, el estudio se ha centrado principalmente en la capacidad predictiva de los modelos, sin profundizar en aspectos inferenciales como la significación estadística de los coeficientes o la incertidumbre asociada a las predicciones.
 
