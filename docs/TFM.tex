@@ -102,6 +102,47 @@
 
 \newpage
 
+% ==================== RESUMEN ====================
+\cleardoublepage
+\chapter*{Resumen}
+
+Este Trabajo Fin de Máster analiza el comportamiento de la regresión por Mínimos Cuadrados Parciales (PLS) en escenarios caracterizados por multicolinealidad y alta dimensionalidad, comparando su rendimiento frente a diferentes métodos de regresión lineal. El estudio se motiva por la creciente presencia de conjuntos de datos complejos en áreas como la espectroscopía y la bioinformática, donde el elevado número de predictores y la fuerte correlación entre variables pueden limitar la aplicación de modelos clásicos.
+
+El trabajo desarrolla una revisión teórica de la regresión PLS como una metodología basada en la construcción de componentes latentes que maximizan la covarianza entre las variables predictoras y la variable respuesta. Se estudian sus fundamentos matemáticos, los principales algoritmos de estimación, NIPALS y SIMPLS, así como su relación con otros enfoques destinados a tratar problemas de multicolinealidad y alta dimensionalidad, incluyendo Ridge, Lasso y la regresión por Componentes Principales (PCR).
+
+Desde el punto de vista computacional, se implementa un entorno de análisis reproducible mediante un paquete modular desarrollado en Python, que integra las diferentes etapas del proceso experimental: preprocesamiento de datos, ajuste de modelos, selección de hiperparámetros, validación cruzada y evaluación predictiva. Esta arquitectura permite comparar los distintos métodos bajo un marco homogéneo y garantizar la trazabilidad de los resultados obtenidos.
+
+La evaluación empírica se realiza utilizando tres conjuntos de datos reales con características diferenciadas: Tecator, Gasoline y Riboflavin. Estos permiten estudiar el comportamiento de los modelos en escenarios que van desde datos espectrales con fuerte estructura latente hasta problemas de alta dimensionalidad extrema donde el número de variables supera ampliamente al número de observaciones.
+
+Los resultados obtenidos muestran que no existe un único método óptimo para todos los escenarios, sino que el rendimiento depende de la estructura interna del problema. PLS presenta un comportamiento especialmente competitivo cuando existe una fuerte correlación entre predictores y una estructura latente relacionada con la respuesta, destacando en problemas espectrales. Por otro lado, OLS puede mantener un buen rendimiento en situaciones donde la dimensionalidad es moderada, mientras que los métodos basados en regularización, especialmente Lasso, resultan más adecuados en contextos de alta dimensionalidad extrema con estructuras dispersas.
+
+En conjunto, este trabajo confirma la importancia de seleccionar la técnica de regresión considerando las características de los datos y no únicamente el número de predictores disponibles. Asimismo, evidencia el valor de PLS como una herramienta robusta para la reducción supervisada de dimensionalidad y la construcción de modelos predictivos en presencia de multicolinealidad.
+
+\vspace{0.5cm}
+
+\textbf{Palabras clave:} regresión PLS, multicolinealidad, alta dimensionalidad, regularización, PCR, aprendizaje supervisado.
+
+\cleardoublepage
+\chapter*{Abstract}
+
+This Master’s Thesis analyzes the behavior of Partial Least Squares Regression (PLS) in scenarios characterized by multicollinearity and high dimensionality, comparing its performance against different linear regression methods. The study is motivated by the increasing presence of complex datasets in fields such as spectroscopy and bioinformatics, where a large number of predictors and strong correlations between variables may limit the applicability of classical regression models.
+
+The work provides a theoretical review of PLS regression as a methodology based on the construction of latent components that maximize the covariance between predictors and the response variable. Its mathematical foundations, the main estimation algorithms, NIPALS and SIMPLS, and its relationship with alternative approaches for handling multicollinearity and high-dimensional data, including Ridge, Lasso and Principal Component Regression (PCR), are discussed.
+
+From a computational perspective, a reproducible analysis framework is implemented through a modular Python package that integrates the main stages of the experimental workflow: data preprocessing, model fitting, hyperparameter selection, cross-validation and predictive evaluation. This architecture enables a consistent comparison of the different methods while ensuring traceability and reproducibility of the results.
+
+The empirical evaluation is carried out using three real datasets with different characteristics: Tecator, Gasoline and Riboflavin. These datasets allow the analysis of model performance across scenarios ranging from spectral data with strong latent structures to extreme high-dimensional problems where the number of variables greatly exceeds the number of observations.
+
+The results show that there is no single optimal method for all situations, as performance strongly depends on the underlying data structure. PLS provides highly competitive results when predictors are strongly correlated and a relevant latent structure exists, particularly in spectral applications. In contrast, OLS may remain effective in moderate-dimensional settings, while regularization methods, especially Lasso, are more suitable for extreme high-dimensional problems with sparse structures.
+
+Overall, this study highlights the importance of selecting regression techniques according to the characteristics of the data rather than only considering the number of available predictors. It also confirms the value of PLS as a robust tool for supervised dimensionality reduction and predictive modeling in the presence of multicollinearity.
+
+\vspace{0.5cm}
+
+\textbf{Key words:} PLS regression, multicollinearity, high dimensionality, regularization, PCR, supervised learning.
+
+
+
 % ==================== CAPÍTULOS ====================
 \fancyhead[L]{\nouppercase{\leftmark}}
 \fancyfoot[C]{\thepage}
