@@ -88,8 +88,67 @@
 
 \end{titlepage}
 
-% ==================== ÍNDICE ====================
+% ==================== ORIGINALIDAD ====================
+\thispagestyle{empty}
 
+\begin{center}
+    \includegraphics[width=4cm]{./logos/logocolor.png}
+
+    \vspace{0.2cm}
+
+\end{center}
+
+\vspace{0.8cm}
+
+
+%=========================
+% CAJA TÍTULO
+%=========================
+
+\begin{center}
+\begin{tikzpicture}
+\node[
+    draw=red!40,
+    line width=0.5pt,
+    minimum width=14cm,
+    minimum height=1.2cm,
+    align=center
+]
+{
+\textbf{DECLARACIÓN DE AUTORÍA Y ORIGINALIDAD}\\
+\textbf{DE TRABAJO FIN DE MÁSTER}
+};
+\end{tikzpicture}
+\end{center}
+
+
+\vspace{0.5cm}
+
+
+\onehalfspacing
+
+\noindent
+\textbf{ANDRES ALEJANDRO YSTURIZ CALDEIRA} con NIE nº \textbf{Y6333991N}, 
+estudiante del Máster Universitario en \textbf{Estadística Aplicada}, 
+en relación con el Trabajo Fin de Máster \textit{Análisis comparativo de la Regresión por Mínimos Cuadrados Parciales (PLS) en escenarios de Alta dimensionalidad y Multicolinealidad}, presentado en la convocatoria de \textbf{2025 / 2026} declara que asume la originalidad de dicho 
+trabajo, entendida en el sentido de que no ha utilizado fuentes sin 
+citarlas debidamente.
+
+
+\vfill
+
+
+\noindent\makebox[\textwidth][c]{%
+\includegraphics[
+    width=\dimexpr\paperwidth-3cm\relax,
+    keepaspectratio
+]{./logos/Informacion_proteccion.png}
+}
+
+\newpage
+% ==================== ÍNDICE ====================
+\setcounter{page}{1}
+\pagenumbering{roman}
 \tableofcontents
 
 \clearpage
@@ -147,7 +206,7 @@ Overall, this study highlights the importance of selecting regression techniques
 \fancyhead[L]{\nouppercase{\leftmark}}
 \fancyfoot[C]{\thepage}
 \chapter{Introducción}
-
+\pagenumbering{arabic}
 Cuando se hacen análisis de datos en contextos donde el número de variables explicativas es elevado, se plantean dificultades específicas asociadas a la presencia de relaciones de dependencia entre predictores. En áreas como la quimiometría, la bioinformática o la espectroscopía, esta situación suele generar problemas de multicolinealidad que afectan la estabilidad y la interpretabilidad de los modelos de regresión. Tal como indican Mateos‑Aparicio Morales y Caballero Domínguez, “el problema de la multicolinealidad [...] produce situaciones de inestabilidad de los coeficientes de regresión” \cite{mateos2007}, lo que evidencia una necesidad de utilizar métodos capaces de manejarse en escenarios con alta correlación entre variables.
 
 La regresión por mínimos cuadrados ordinarios (\textit{Ordinary Least Squares} - OLS) constituye el punto de partida natural por su simplicidad y sus propiedades en los términos clásicos, sin embargo, presenta limitaciones claras cuando los predictores están altamente correlacionados o cuando la dimensionalidad del problema es elevada. La matriz \(X^\top X\) puede volverse casi singular o no ser invertible, generando estimaciones inestables y sensibles al ruido, con un impacto directo sobre la capacidad predictiva del modelo \cite{hastie2009, samosir2022}.
